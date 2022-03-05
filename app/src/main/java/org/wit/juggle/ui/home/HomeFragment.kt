@@ -13,15 +13,21 @@ import androidx.lifecycle.ViewModelProvider
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
 
+import com.google.api.services.calendar.Calendar;
+import com.google.api.services.calendar.model.CalendarList;
+import com.google.api.services.calendar.model.CalendarListEntry;
+
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,10 +46,10 @@ class HomeFragment : Fragment() {
         })
 
         Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
-        Toast.makeText(context, homeViewModel.googleSignInAccount.toString(), Toast.LENGTH_LONG).show()
-        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInAccount}")
+        Toast.makeText(context, homeViewModel.googleSignInClient.toString(), Toast.LENGTH_LONG).show()
         Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient}")
-        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient.value}")
+        //Log.w(TAG, "line 44 : ${signed.googleSignInClient}")
+        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient.value?.signInIntent}")
         //revokeAccess()
         
         //val intent = Intent(this, GrabberLogin::class.java)

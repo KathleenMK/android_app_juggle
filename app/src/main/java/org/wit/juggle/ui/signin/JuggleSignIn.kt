@@ -36,24 +36,8 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_google_sign_in)
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//            .requestScopes(Scope("https://www.googleapis.com/auth/calendar"))
-//           // .requestScopes(Scope ("https://www.googleapis.com/auth/calendar.readonly"))
-//           // .requestScopes(Scope ("https://www.googleapis.com/auth/calendar.events"))
-//            .requestEmail()
-//            .build()
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        //mGoogleSignInClient = JuggleSignIn.getClient(this, gso);
-        //mGoogleSignInClient = JuggleSignIn.getClient(application!!.applicationContext, gso);
-
-
-        // Button listeners
+         // Button listeners
         findViewById<View>(R.id.sign_in_button).setOnClickListener(this)
-        //findViewById<View>(R.id.sign_out_button).setOnClickListener(this)
-        //findViewById<View>(R.id.disconnect_button).setOnClickListener(this)
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
@@ -121,20 +105,6 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
         startForResult.launch(signInIntent)
     }
 
-//    private fun signOut() {
-//        Log.w(TAG, "line 105 : sign out")
-//        mGoogleSignInClient.signOut()
-//            .addOnCompleteListener(this) {
-//                     updateUI(null)
-//                           }
-//    }
-//
-//    private fun revokeAccess() {
-//        mGoogleSignInClient.revokeAccess()
-//            .addOnCompleteListener(this) {
-//                             updateUI(null)
-//                          }
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

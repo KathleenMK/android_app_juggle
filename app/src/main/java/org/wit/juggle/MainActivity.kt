@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import org.wit.juggle.databinding.ActivityMainBinding
 import org.wit.juggle.ui.signin.SignedInViewModel
 import org.wit.juggle.ui.signin.JuggleSignIn
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var signedInViewModel: SignedInViewModel
+    private val mGoogleSignInClient: GoogleSignInClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                     //getString(R.string.auth_failed),
                     signedInViewModel.liveFirebaseUser.value?.displayName,
                     Toast.LENGTH_LONG).show()
+
+
             }
         })
 
@@ -75,7 +79,13 @@ class MainActivity : AppCompatActivity() {
                 signedInViewModel.logOut()
                 true
             }
+            R.id.menu_revoke -> {
+                signedInViewModel.revoke()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

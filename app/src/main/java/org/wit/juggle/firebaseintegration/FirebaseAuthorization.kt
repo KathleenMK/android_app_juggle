@@ -6,6 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.Scope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -37,6 +38,7 @@ class FirebaseAuthorization (application: Application) {
     private fun configureGoogleSignIn() {
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestScopes(Scope("https://www.googleapis.com/auth/calendar"))
             .requestIdToken(application!!.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
@@ -64,6 +66,14 @@ class FirebaseAuthorization (application: Application) {
 
     fun logOut() {
         firebaseAuth!!.signOut()
+        googleSignInClient.value!!.signOut()
+        loggedOut.postValue(true)
+        errorStatus.postValue(false)
+    }
+
+    fun revoke() {
+        firebaseAuth!!.signOut()
+        googleSignInClient.value!!.revokeAccess()
         googleSignInClient.value!!.signOut()
         loggedOut.postValue(true)
         errorStatus.postValue(false)
