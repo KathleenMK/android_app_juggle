@@ -1,15 +1,18 @@
 package org.wit.juggle.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import org.wit.juggle.R
+//import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
+
 
 class HomeFragment : Fragment() {
 
@@ -35,6 +38,17 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, homeViewModel.googleSignInAccount.toString(), Toast.LENGTH_LONG).show()
+        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInAccount}")
+        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient}")
+        Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient.value}")
+        //revokeAccess()
+        
+        //val intent = Intent(this, GrabberLogin::class.java)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        //startActivity(intent)
         return root
     }
 
@@ -42,4 +56,23 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        private const val TAG = "HomeFragment"
+
+    }
+
+    private fun revokeAccess() {
+        homeViewModel.googleSignInClient.value!!.revokeAccess()
+        //startActivity(Intent(this, JuggleSignIn::class.java))
+            //.addOnCompleteListener(this) {
+                //updateUI(null)
+            //}
+        //val intent = Intent(this, JuggleSignIn::class.java)
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        //startActivity(intent)
+
+    }
+
+
 }
