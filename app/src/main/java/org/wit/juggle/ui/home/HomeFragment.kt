@@ -10,12 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.wit.juggle.api.GoogleCalendarApi
+import org.wit.juggle.api.RetrofitHelper
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
-
-import com.google.api.services.calendar.Calendar;
-import com.google.api.services.calendar.model.CalendarList;
-import com.google.api.services.calendar.model.CalendarListEntry;
+import timber.log.Timber
 
 
 class HomeFragment : Fragment() {
@@ -45,12 +46,22 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
-        Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
-        Toast.makeText(context, homeViewModel.googleSignInClient.toString(), Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, homeViewModel.googleSignInClient.toString(), Toast.LENGTH_LONG).show()
         Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient}")
         //Log.w(TAG, "line 44 : ${signed.googleSignInClient}")
         Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient.value?.signInIntent}")
         //revokeAccess()
+
+        val googleCalendarApi = RetrofitHelper.getInstance().create(GoogleCalendarApi::class.java)
+        // launching a new coroutine
+        GlobalScope.launch {
+            val result = googleCalendarApi.getCalendarList()
+            Timber.i(result.toString())
+            if (result != null)
+            // Checking the results
+                Timber.i("api reponse: "+result.body().toString())
+        }
         
         //val intent = Intent(this, GrabberLogin::class.java)
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -67,18 +78,4 @@ class HomeFragment : Fragment() {
         private const val TAG = "HomeFragment"
 
     }
-
-    private fun revokeAccess() {
-        homeViewModel.googleSignInClient.value!!.revokeAccess()
-        //startActivity(Intent(this, JuggleSignIn::class.java))
-            //.addOnCompleteListener(this) {
-                //updateUI(null)
-            //}
-        //val intent = Intent(this, JuggleSignIn::class.java)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        //startActivity(intent)
-
-    }
-
-
 }

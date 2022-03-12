@@ -18,6 +18,7 @@ import org.wit.juggle.databinding.ActivityMainBinding
 import org.wit.juggle.ui.signin.SignedInViewModel
 import org.wit.juggle.ui.signin.JuggleSignIn
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -41,7 +42,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-            }
+
+    }
 
     public override fun onStart() {
         super.onStart()
@@ -49,10 +51,12 @@ class MainActivity : AppCompatActivity() {
         signedInViewModel.liveFirebaseUser.observe(this, { firebaseUser ->
             if (firebaseUser != null) {
                 //updateNavHeader(firebaseUser)
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     //getString(R.string.auth_failed),
-                    signedInViewModel.liveFirebaseUser.value?.displayName,
-                    Toast.LENGTH_LONG).show()
+                    "Welcome " + signedInViewModel.liveFirebaseUser.value?.displayName,
+                    Toast.LENGTH_LONG
+                ).show()
 
 
             }

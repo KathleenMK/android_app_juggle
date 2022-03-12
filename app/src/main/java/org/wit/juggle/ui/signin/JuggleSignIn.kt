@@ -17,6 +17,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import org.wit.juggle.MainActivity
 import androidx.lifecycle.Observer
+import com.google.android.gms.auth.GoogleAuthUtil
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignInApi
+import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.util.ExponentialBackOff
+import com.google.api.services.calendar.CalendarScopes
+import timber.log.Timber
+
 
 
 class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
@@ -34,6 +43,8 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.plant(Timber.DebugTree())
+
         setContentView(R.layout.activity_google_sign_in)
 
          // Button listeners
@@ -47,7 +58,7 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
         // [END customize_button]
 
         //findViewById<View>(org.wit.juggle.R.id.sign_in_button).setOnClickListener { view: View? ->
-           Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
+         //  Toast.makeText(this, "Logging In", Toast.LENGTH_SHORT).show()
         //    signIn()
         //}
 
@@ -88,7 +99,6 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
 
 
    override fun onClick(v: View) {
-        Log.w(TAG, "in onclick")
         when (v.id) {
             R.id.sign_in_button -> googleSignIn()
             //R.id.sign_out_button -> signOut()
@@ -102,55 +112,14 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
         val signInIntent = signInViewModel.firebaseAuthorization
             .googleSignInClient.value!!.signInIntent
 
+        val result = Auth.GoogleSignInApi.getSignInResultFromIntent(signInIntent)
+        Timber.i("line 110"+result.toString())
+
         startForResult.launch(signInIntent)
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            // The Task returned from this call is always completed, no need to attach
-            // a listener.
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleSignInResult(task)
-        }
-    }
-
-    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-
-            startActivity(Intent(this, MainActivity::class.java))
-            // Signed in successfully, show authenticated UI.
-            updateUI(account)
-           } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Log.w(TAG, "signInResult:failed code=" + e.statusCode)
-            updateUI(null)
-        }
-    }
-
-
-    private fun updateUI(account: GoogleSignInAccount?) {
-        if (account != null) {
-            //startActivity(MainActivity)
-            Log.w(TAG, "line 151 :${account.account}")
-            Log.w(TAG, "line 151 :${account.id}")
-            Log.w(TAG, "line 151 :${account.displayName}")
-            Log.w(TAG, "line 151 :${account.requestedScopes}")
-            //mStatusTextView!!.text = getString(org.wit.juggle.R.string.signed_in_fmt, account.displayName)
-            //findViewById<View>(org.wit.juggle.R.id.sign_in_button).visibility = View.GONE
-            //findViewById<View>(R.id.sign_out_and_disconnect).visibility = View.VISIBLE
-            startActivity(Intent(this, MainActivity::class.java))
-        } else {
-            //mStatusTextView?.setText(org.wit.juggle.R.string.signed_out)
-            findViewById<View>(R.id.sign_in_button).visibility = View.VISIBLE
-            //findViewById<View>(R.id.sign_out_and_disconnect).visibility = View.GONE
-        }
-    }
+//
 
     companion object {
         private const val TAG = "SignInActivity"
@@ -158,22 +127,34 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
     }
 
     private fun setupGoogleSignInCallback() {
+        Timber.i("in setupGoogleSIgnInCallback()")
         startForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 when(result.resultCode){
                     RESULT_OK -> {
                         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                        Timber.i("task.result.idToken: "+task.result.idToken)
+                        Timber.i("task.result.serverAuthCode: "+task.result.serverAuthCode)
+                        // trying to find the access token
+                        val credential: GoogleAccountCredential =
+                            GoogleAccountCredential.usingOAuth2(applicationContext,
+                        arrayListOf(CalendarScopes.CALENDAR))
+                        .setBackOff(ExponentialBackOff())
+                        Timber.i("credential line 187: "+credential.toString())
+                        // end of tryong to find the access token
+
+
                         try {
                             // Google Sign In was successful, authenticate with Firebase
                             val account = task.getResult(ApiException::class.java)
+                            Timber.i("account.grantedScopes.toString(): "+account.grantedScopes.toString())
                             signInViewModel.authWithGoogle(account!!)
                         } catch (e: ApiException) {
                             // Google Sign In failed
                            // Timber.i( "Google sign in failed $e")
-                           // Snackbar.make(loginBinding.loginLayout, "Authentication Failed.",
-                          //      Snackbar.LENGTH_SHORT).show()
+
                         }
-                       // Timber.i("DonationX Google Result $result.data")
+
                     }
                     RESULT_CANCELED -> {
 
