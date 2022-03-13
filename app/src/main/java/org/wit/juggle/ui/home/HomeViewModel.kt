@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseUser
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
+import org.wit.juggle.models.Calendar
 
 //class HomeViewModel : ViewModel() {
 class HomeViewModel (app: Application) : AndroidViewModel(app) {
@@ -24,6 +25,12 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
     var liveFirebaseUser : MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
     var loggedOut : MutableLiveData<Boolean> = firebaseAuthorization.loggedOut
     var googleSignInClient = MutableLiveData<GoogleSignInClient>()
+
+    private val calendarsList =
+        MutableLiveData<List<Calendar>>()
+
+    val observableCalendarsList: LiveData<List<Calendar>>
+        get() = calendarsList
 
     val text: LiveData<String> = _text
 }

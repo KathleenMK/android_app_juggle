@@ -8,8 +8,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.juggle.R
+import org.wit.juggle.api.GoogleCalendarApi
+import org.wit.juggle.api.RetrofitHelper
 import org.wit.juggle.databinding.FragmentDashboardBinding
+import timber.log.Timber
 
 class DashboardFragment : Fragment() {
 
@@ -35,6 +40,17 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val googleCalendarApi = RetrofitHelper.getInstance().create(GoogleCalendarApi::class.java)
+        // launching a new coroutine
+        GlobalScope.launch {
+            val result = googleCalendarApi.getCalendarEventList()
+            Timber.i(result.toString())
+            if (result != null)
+            // Checking the results
+                Timber.i("api reponse: "+result.body().toString())
+        }
+
         return root
     }
 

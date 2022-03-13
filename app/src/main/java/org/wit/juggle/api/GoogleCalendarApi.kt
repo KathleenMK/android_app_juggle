@@ -1,16 +1,29 @@
 package org.wit.juggle.api
 
 import org.wit.juggle.models.CalendarList
+import org.wit.juggle.models.EventList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import org.wit.juggle.R
+import retrofit2.http.Header
+
 
 interface GoogleCalendarApi {
 
-    @Headers(value = ["Authorization:Bearer ya29.A0ARrdaM-yA7QCSsmRWUj-NOGJqIkMc_9yhYTfg_kgH5ssUmGMHL_hE9h0yu4EeTxMIQ7_eUmKFmZ8ve5ch8YwlRzYI5BspZDauPOmHxp46ii1-nJan6XLIIhrva0Ay2osBLfSDaYdREceUQf1I6NE8CGdMbwS"])
+    //@Headers(value = ["Authorization:Bearer "])
 
-    @GET("calendar/v3/users/me/calendarList")
-suspend fun getCalendarList() : Response<CalendarList>
+    @GET("users/me/calendarList")
+    suspend fun getCalendarList(): Response<CalendarList>
+    //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarList>  //wk 9
+
+    //@Headers(value = ["Authorization:Bearer "])
+
+    @GET("calendars/{calendarId}/events")
+    suspend fun getCalendarEventList(): Response<EventList>
+
+//    @GET("calendars/rxd842@gmail.com/events")
+//    suspend fun getCalendarEventList(): Response<EventList>
 
 // attempt to get at the access token, currently hardcoded above
 //    @Headers(value = ["grant_type: authorization_code",
