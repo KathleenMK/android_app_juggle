@@ -11,8 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.wit.juggle.adapters.CalendarAdapter
+import org.wit.juggle.adapters.CalendarClickListener
 import org.wit.juggle.api.GoogleCalendarApi
 import org.wit.juggle.api.RetrofitHelper
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
@@ -24,7 +28,7 @@ import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), CalendarClickListener {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
@@ -55,8 +59,13 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
+        binding.recyclerViewCalendars.layoutManager = LinearLayoutManager(activity)
+        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
+            calendars?.let { render(calendars as ArrayList<CalendarModel>) }
+        })
+
         showTickTock(ticktock,"Calendar Info on the way...")
-        homeViewModel.observableCalendarsList.observe(viewLifecycleOwner, Observer {
+        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer {
                 calendars ->
             calendars?.let {
                 render(calendars as ArrayList<CalendarModel>)
@@ -92,13 +101,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun render(calendarList: ArrayList<CalendarModel>) {
+    private fun render(calendars: ArrayList<CalendarModel>) {
+      binding.recyclerViewCalendars.adapter = CalendarAdapter(calendars,this)
 
-
-        if (calendarList.isEmpty()) {
+        if (calendars.isEmpty()) {
             Toast.makeText(context, "home frag in render is empty", Toast.LENGTH_LONG).show()
         } else {
-            Timber.i("Home fragment render"+calendarList.toString())
+            Timber.i("Home fragment render"+calendars.toString())
             Toast.makeText(context, "home frag in render else", Toast.LENGTH_LONG).show()
         }
     }
@@ -107,4 +116,9 @@ class HomeFragment : Fragment() {
         private const val TAG = "HomeFragment"
 
     }
+
+    override fun onCalendarClick(calendar: CalendarModel) {
+        TODO("Not yet implemented")
+    }
+
 }

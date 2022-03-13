@@ -26,11 +26,11 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
     var loggedOut : MutableLiveData<Boolean> = firebaseAuthorization.loggedOut
     var googleSignInClient = MutableLiveData<GoogleSignInClient>()
 
-    private val calendarsList =
+    private val calendars =
         MutableLiveData<List<CalendarModel>>()
 
-    val observableCalendarsList: LiveData<List<CalendarModel>>
-        get() = calendarsList
+    val observableCalendars: LiveData<List<CalendarModel>>
+        get() = calendars
 
     val text: LiveData<String> = _text
 
@@ -38,8 +38,8 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
 
     fun load() {
         try {
-            CalendarManager.findCalendars(calendarsList)
-            Timber.i("Retrofit Success : $calendarsList.value")
+            CalendarManager.findCalendars(calendars)
+            Timber.i("Retrofit Success : $calendars.value")
         }
         catch (e: Exception) {
             Timber.i("Retrofit Error : $e.message")

@@ -11,7 +11,7 @@ import retrofit2.http.Path
 
 interface GoogleCalendarApi {
 
-    @Headers(value = ["Authorization:Bearer ya29.A0ARrdaM8ePGeFhTCQJQcFgjL4tKvuZZKbc42yaNDIMxBGl4i_p3_Ng_M_lzV5Fs7Kqng65-q7GMH_HQSH45vkOsl_uoR5bfMR_MOqTCRSVe-4IUkimOVbsn-FpnROv6lERivkfJGjA_6MbNo4bjBMBZUiuPkv_g"])
+    @Headers(value = ["Authorization:Bearer ya"])
     @GET("users/me/calendarList")
     fun getCalendars(): Call<CalendarListModel>
     //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarListModel>  //wk 9

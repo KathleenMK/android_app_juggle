@@ -10,7 +10,7 @@ import timber.log.Timber
 object CalendarManager : CalendarStore {
 
 
-    override fun findCalendars(calendarsList: MutableLiveData<List<CalendarModel>>) {
+    override fun findCalendars(calendars: MutableLiveData<List<CalendarModel>>) {
 
         val call = RetrofitHelper.getApi().getCalendars()
 
@@ -31,7 +31,7 @@ object CalendarManager : CalendarStore {
                 response: Response<CalendarListModel>
             ) {
                 val calendarListModelValue = response.body() as CalendarListModel
-                calendarsList.value = calendarListModelValue.items as ArrayList<CalendarModel>
+                calendars.value = calendarListModelValue.items as ArrayList<CalendarModel>
                Timber.i("Retrofit JSON = ${response.body()}")
             }
 
