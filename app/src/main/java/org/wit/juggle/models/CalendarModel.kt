@@ -1,6 +1,6 @@
 package org.wit.juggle.models
 
-data class Calendar(
+data class CalendarModel(
     val summary: String,
     val id: String,
     val accessRole: String

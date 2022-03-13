@@ -1,26 +1,25 @@
 package org.wit.juggle.api
 
-import org.wit.juggle.models.CalendarList
-import org.wit.juggle.models.EventList
-import retrofit2.Response
+import org.wit.juggle.models.CalendarListModel
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import org.wit.juggle.R
-import retrofit2.http.Header
+import org.wit.juggle.models.CalendarModel
+import org.wit.juggle.models.EventModel
+import retrofit2.Call
+import retrofit2.http.Path
 
 
 interface GoogleCalendarApi {
 
-    //@Headers(value = ["Authorization:Bearer "])
-
+    @Headers(value = ["Authorization:Bearer ya29.A0ARrdaM8ePGeFhTCQJQcFgjL4tKvuZZKbc42yaNDIMxBGl4i_p3_Ng_M_lzV5Fs7Kqng65-q7GMH_HQSH45vkOsl_uoR5bfMR_MOqTCRSVe-4IUkimOVbsn-FpnROv6lERivkfJGjA_6MbNo4bjBMBZUiuPkv_g"])
     @GET("users/me/calendarList")
-    suspend fun getCalendarList(): Response<CalendarList>
-    //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarList>  //wk 9
+    fun getCalendars(): Call<CalendarListModel>
+    //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarListModel>  //wk 9
 
     //@Headers(value = ["Authorization:Bearer "])
 
     @GET("calendars/{calendarId}/events")
-    suspend fun getCalendarEventList(): Response<EventList>
+    fun getCalendarEvents(@Path("calendarId") calendarId:String): Call<List<EventModel>>
 
 //    @GET("calendars/rxd842@gmail.com/events")
 //    suspend fun getCalendarEventList(): Response<EventList>
@@ -33,5 +32,5 @@ interface GoogleCalendarApi {
 //        "code: ***"])
 //
 //    @POST("token")
-//    suspend fun getQuotes() : Response<CalendarList>
+//    suspend fun getQuotes() : Response<CalendarListModel>
 }

@@ -21,5 +21,9 @@
     <string name="auth_code_fmt">Auth Code: %s</string>
     <string name="id_token_fmt">ID Token: %s</string>
 
+    <!-- 13Mar22 -->
+
+    <string name="tickTockText">Getting Calendar Stuff…</string>
+
 
 </resources>

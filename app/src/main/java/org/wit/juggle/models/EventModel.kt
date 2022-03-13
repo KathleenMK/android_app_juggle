@@ -3,7 +3,7 @@ package org.wit.juggle.models
 import com.google.api.client.util.DateTime
 import com.google.gson.annotations.SerializedName
 
-data class Event(
+data class EventModel(
     val summary: String,
     val id: String,
     //@SerializedName("start.dateTime")

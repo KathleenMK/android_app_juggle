@@ -1,5 +1,6 @@
 package org.wit.juggle.ui.home
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,10 @@ import org.wit.juggle.api.GoogleCalendarApi
 import org.wit.juggle.api.RetrofitHelper
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
+import org.wit.juggle.models.CalendarModel
+import org.wit.juggle.utils.createTickTock
+import org.wit.juggle.utils.hideTickTock
+import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
 
 
@@ -29,6 +34,8 @@ class HomeFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    lateinit var ticktock : AlertDialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,9 +48,20 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        ticktock = createTickTock(requireActivity())
+
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
+        })
+
+        showTickTock(ticktock,"Calendar Info on the way...")
+        homeViewModel.observableCalendarsList.observe(viewLifecycleOwner, Observer {
+                calendars ->
+            calendars?.let {
+                render(calendars as ArrayList<CalendarModel>)
+                hideTickTock(ticktock)
+            }
         })
 
         //Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
@@ -53,15 +71,15 @@ class HomeFragment : Fragment() {
         Log.w(TAG, "line 44 : ${homeViewModel.googleSignInClient.value?.signInIntent}")
         //revokeAccess()
 
-        val googleCalendarApi = RetrofitHelper.getInstance().create(GoogleCalendarApi::class.java)
-        // launching a new coroutine
-        GlobalScope.launch {
-            val result = googleCalendarApi.getCalendarList()
-            Timber.i(result.toString())
-            if (result != null)
-            // Checking the results
-                Timber.i("api reponse: "+result.body().toString())
-        }
+//        val googleCalendarApi = RetrofitHelper.getInstance().create(GoogleCalendarApi::class.java)
+//        // launching a new coroutine
+//        GlobalScope.launch {
+//            val result = googleCalendarApi.getCalendarList()
+//            Timber.i(result.toString())
+//            if (result != null)
+//            // Checking the results
+//                Timber.i("api reponse: "+result.body().toString())
+//        }
         
         //val intent = Intent(this, GrabberLogin::class.java)
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -72,6 +90,17 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun render(calendarList: ArrayList<CalendarModel>) {
+
+
+        if (calendarList.isEmpty()) {
+            Toast.makeText(context, "home frag in render is empty", Toast.LENGTH_LONG).show()
+        } else {
+            Timber.i("Home fragment render"+calendarList.toString())
+            Toast.makeText(context, "home frag in render else", Toast.LENGTH_LONG).show()
+        }
     }
 
     companion object {
