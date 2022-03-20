@@ -19,9 +19,11 @@ import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.Auth
 
 import com.google.android.gms.auth.api.signin.GoogleSignInResult
-
-
-
+import com.google.api.client.extensions.android.http.AndroidHttp
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.client.util.ExponentialBackOff
+import com.google.api.services.calendar.CalendarScopes
 
 
 class FirebaseAuthorization (application: Application) {
@@ -60,6 +62,8 @@ class FirebaseAuthorization (application: Application) {
 
         googleSignInClient.value = GoogleSignIn.getClient(application!!.applicationContext, gso)
         Timber.i("line 61 FirebaseA: "+googleSignInClient.value.toString())
+
+
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
@@ -86,6 +90,35 @@ class FirebaseAuthorization (application: Application) {
 
                 }
             }
+
+     // mCredential is null...
+//        var mCredential = GoogleAccountCredential.usingOAuth2(
+//            application!!.applicationContext,
+//            arrayListOf(CalendarScopes.CALENDAR)
+//        )
+//            .setBackOff(ExponentialBackOff())
+//
+////        if (mCredential != null) {
+////            mCredential.selectedAccountName = acct.account?.name
+////        }
+//
+//        if (mCredential != null) {
+//            Timber.i("mCred name "+mCredential.selectedAccountName)
+//        }  // error: java.lang.IllegalArgumentException: the name must not be empty: null
+//        //at android.accounts.Account
+//
+//        Timber.i("mCredential..."+mCredential.toString())
+//
+//        val transport = AndroidHttp.newCompatibleTransport()
+//        val jsonFactory = JacksonFactory.getDefaultInstance()
+//        val service = com.google.api.services.calendar.Calendar.Builder(
+//            transport, jsonFactory, mCredential)
+//            .setApplicationName("Juggle")
+//            .build()
+//
+//        val calendar = service.calendars().get("primary").execute()
+//
+//        println("println"+calendar.summary)
     }
 
     fun logOut() {

@@ -1,5 +1,5 @@
 package org.wit.juggle.models
 
-data class EventList(
+data class EventListModel(
     val items: List<EventModel>
 )

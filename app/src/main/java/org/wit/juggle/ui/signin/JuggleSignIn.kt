@@ -20,8 +20,10 @@ import androidx.lifecycle.Observer
 import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignInApi
+import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.ExponentialBackOff
 import com.google.api.services.calendar.CalendarScopes
 import timber.log.Timber
@@ -135,12 +137,24 @@ class JuggleSignIn : AppCompatActivity() , View.OnClickListener{
                         val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                         Timber.i("task.result.idToken: "+task.result.idToken)
                         Timber.i("task.result.serverAuthCode: "+task.result.serverAuthCode)
-                        // trying to find the access token
-                        val credential: GoogleAccountCredential =
+                         //trying to find the access token
+                        var mCredential: GoogleAccountCredential? = null
+                        mCredential =
                             GoogleAccountCredential.usingOAuth2(applicationContext,
                         arrayListOf(CalendarScopes.CALENDAR))
                         .setBackOff(ExponentialBackOff())
-                        Timber.i("credential line 187: "+credential.toString())
+                        Timber.i("credential line 187: "+mCredential.toString())
+                        Timber.i(mCredential.selectedAccountName)
+//                        val transport = AndroidHttp.newCompatibleTransport()
+//                        val jsonFactory = JacksonFactory.getDefaultInstance()
+//                        val service = com.google.api.services.calendar.Calendar.Builder(
+//                            transport, jsonFactory, mCredential)
+//                            .setApplicationName("Juggle")
+//                            .build()
+//
+//                        val calendar = service.calendars().get("primary").execute()
+//
+//                        println("println"+calendar.summary)
                         // end of tryong to find the access token
 
 

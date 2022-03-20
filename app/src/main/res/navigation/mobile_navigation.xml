@@ -9,13 +9,21 @@
         android:id="@+id/navigation_home"
         android:name="org.wit.juggle.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="org.wit.juggle.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+    <argument
+        android:name="calendar"
+        app:argType="org.wit.juggle.models.CalendarModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"

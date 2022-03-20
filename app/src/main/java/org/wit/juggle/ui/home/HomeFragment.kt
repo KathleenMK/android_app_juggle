@@ -1,6 +1,7 @@
 package org.wit.juggle.ui.home
 
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,8 +12,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.api.client.extensions.android.http.AndroidHttp
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
+import com.google.api.client.json.jackson2.JacksonFactory
+import com.google.api.client.util.ExponentialBackOff
+import com.google.api.services.calendar.CalendarScopes
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.wit.juggle.adapters.CalendarAdapter
@@ -26,6 +34,7 @@ import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
+
 
 
 class HomeFragment : Fragment(), CalendarClickListener {
@@ -104,11 +113,36 @@ class HomeFragment : Fragment(), CalendarClickListener {
     private fun render(calendars: ArrayList<CalendarModel>) {
       binding.recyclerViewCalendars.adapter = CalendarAdapter(calendars,this)
 
+//        var mCredential: GoogleAccountCredential? = null
+//
+//        mCredential = GoogleAccountCredential.usingOAuth2(
+//            context,
+//            arrayListOf(CalendarScopes.CALENDAR))
+//            .setBackOff(ExponentialBackOff())
+//
+//        mCredential.selectedAccountName = homeViewModel.googleSignInClient.value.toString()
+//
+//        Timber.i("mCred name"+mCredential.selectedAccountName)  // error: java.lang.IllegalArgumentException: the name must not be empty: null
+//        //at android.accounts.Account
+//
+//        Timber.i("mCredential..."+mCredential.toString())
+//
+//        val transport = AndroidHttp.newCompatibleTransport()
+//        val jsonFactory = JacksonFactory.getDefaultInstance()
+//        val service = com.google.api.services.calendar.Calendar.Builder(
+//            transport, jsonFactory, mCredential)
+//            .setApplicationName("Juggle")
+//            .build()
+//
+//        val calendar = service.calendars().get("primary").execute()
+//
+//        println("println"+calendar.summary)
+
         if (calendars.isEmpty()) {
-            Toast.makeText(context, "home frag in render is empty", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "No Calendars have been found...", Toast.LENGTH_LONG).show()
         } else {
             Timber.i("Home fragment render"+calendars.toString())
-            Toast.makeText(context, "home frag in render else", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -118,7 +152,9 @@ class HomeFragment : Fragment(), CalendarClickListener {
     }
 
     override fun onCalendarClick(calendar: CalendarModel) {
-        TODO("Not yet implemented")
+        Timber.i("in onCalendar Click"+calendar.toString())
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationDashboard(calendar)
+        findNavController().navigate(action)
     }
 
 }

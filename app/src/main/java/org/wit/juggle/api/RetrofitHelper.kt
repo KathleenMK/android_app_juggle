@@ -11,12 +11,13 @@ import org.wit.juggle.R
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
+val tempAc = R.string.temp_bearer_access_token
 
 object RetrofitHelper {
 
     val baseUrl = "https://www.googleapis.com/calendar/v3/"
 
-   val temp = "Bearer ya"
+
 
     fun getApi() : GoogleCalendarApi {
 
@@ -30,19 +31,16 @@ object RetrofitHelper {
             .build()
 
 
-//        fun getInstance(): Retrofit {
-//            return Retrofit.Builder()
-//                .client(client)
-//                .baseUrl(baseUrl)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                // we need to add converter factory to
-//                // convert JSON object to Java object
-//                .build()
+        Timber.i("tempAC"+tempAc.toString())
 
         val apiInterface = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
+//            .client(OkHttpClient.Builder().addInterceptor { chain ->
+//            val request = chain.request().newBuilder().addHeader("Authorization", "Bearer $tempAc").build()
+//            chain.proceed(request)
+//        }.build())
             .build()
         return apiInterface.create(GoogleCalendarApi::class.java)
         }

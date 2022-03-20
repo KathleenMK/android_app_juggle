@@ -15,16 +15,6 @@ object CalendarManager : CalendarStore {
         val call = RetrofitHelper.getApi().getCalendars()
 
         call.enqueue(object : Callback<CalendarListModel> {
-//            override fun onResponse(call: Call<List<CalendarModel>>,
-//                                    response: Response<List<CalendarModel>>
-//            ) {
-//                calendarsList.value = response.body() as ArrayList<CalendarModel>
-//                Timber.i("Retrofit JSON = ${response.body()}")
-//            }
-//
-//            override fun onFailure(call: Call<List<CalendarModel>>, t: Throwable) {
-//                Timber.i("Retrofit Error : $t.message")
-//            }
 
             override fun onResponse(
                 call: Call<CalendarListModel>,
@@ -36,6 +26,28 @@ object CalendarManager : CalendarStore {
             }
 
             override fun onFailure(call: Call<CalendarListModel>, t: Throwable) {
+                Timber.i("Retrofit Error : $t.message")
+            }
+        })
+
+    }
+
+    override fun findCalendarEvents(calendar: CalendarModel, events: MutableLiveData<List<EventModel>>) {
+
+        val call = RetrofitHelper.getApi().getCalendarEvents(calendar.id)
+
+        call.enqueue(object : Callback<EventListModel> {
+
+            override fun onResponse(
+                call: Call<EventListModel>,
+                response: Response<EventListModel>
+            ) {
+                val eventListModelValue = response.body() as EventListModel
+                events.value = eventListModelValue.items as ArrayList<EventModel>
+                Timber.i("Retrofit JSON = ${response.body()}")
+            }
+
+            override fun onFailure(call: Call<EventListModel>, t: Throwable) {
                 Timber.i("Retrofit Error : $t.message")
             }
         })
