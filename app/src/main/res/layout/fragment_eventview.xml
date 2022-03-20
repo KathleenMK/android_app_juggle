@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="calendar"
+            type="org.wit.juggle.models.CalendarModel" />
+        <variable
+            name="event"
+            type="org.wit.juggle.models.EventModel" />
+    </data>
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.eventview.EventViewFragment">
+
+    <TextView
+        android:id="@+id/text_eventview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/calendarSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{calendar.summary}"
+            android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/eventSummary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@{event.summary}"
+        android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/eventStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{event.start.dateTime.toString()}"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/eventEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{event.end.dateTime.toString()}"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/eventCreated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{event.created.toString()}"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</FrameLayout>
+</layout>

@@ -10,12 +10,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.juggle.adapters.EventAdapter
 import org.wit.juggle.adapters.EventClickListener
 import org.wit.juggle.databinding.FragmentEventslistBinding
+import org.wit.juggle.models.CalendarModel
 import org.wit.juggle.models.EventModel
+import org.wit.juggle.ui.home.HomeFragmentDirections
 import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
@@ -128,6 +131,8 @@ class EventsListFragment : Fragment(), EventClickListener {
 
 
     override fun onEventClick(event: EventModel) {
-        TODO("Not yet implemented")
+        Timber.i("in onEvent Click"+event.toString())
+        val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar,event)
+        findNavController().navigate(action)
     }
 }
