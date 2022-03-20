@@ -1,4 +1,4 @@
-package org.wit.juggle.ui.dashboard
+package org.wit.juggle.ui.eventslist
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -14,18 +14,18 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.juggle.adapters.EventAdapter
 import org.wit.juggle.adapters.EventClickListener
-import org.wit.juggle.databinding.FragmentDashboardBinding
+import org.wit.juggle.databinding.FragmentEventslistBinding
 import org.wit.juggle.models.EventModel
 import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
 
-class DashboardFragment : Fragment(), EventClickListener {
+class EventsListFragment : Fragment(), EventClickListener {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
-    private val args by navArgs<DashboardFragmentArgs>()
-    private var _binding: FragmentDashboardBinding? = null
+    private lateinit var eventsListViewModel: EventsListViewModel
+    private val args by navArgs<EventsListFragmentArgs>()
+    private var _binding: FragmentEventslistBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -38,29 +38,29 @@ class DashboardFragment : Fragment(), EventClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        eventsListViewModel =
+            ViewModelProvider(this).get(EventsListViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentEventslistBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         ticktock = createTickTock(requireActivity())
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textEventslist
+        eventsListViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
 
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(activity)
-        dashboardViewModel.observableEvents.observe(viewLifecycleOwner, Observer { events ->
+        eventsListViewModel.observableEvents.observe(viewLifecycleOwner, Observer { events ->
             events?.let { render(events as ArrayList<EventModel>) }
         })
 
-        Timber.i("dashboard Frag: "+args.calendar)
+        Timber.i("eventslist Frag: "+args.calendar)
 
 
         showTickTock(ticktock,"Event Info on the way...")
-        dashboardViewModel.observableEvents.observe(viewLifecycleOwner, Observer {
+        eventsListViewModel.observableEvents.observe(viewLifecycleOwner, Observer {
                 events ->
             events?.let {
                 render(events as ArrayList<EventModel>)
@@ -78,7 +78,7 @@ class DashboardFragment : Fragment(), EventClickListener {
 //                Timber.i("api reponse: "+result.body().toString())
 //        }
 
-        dashboardViewModel.findCalendarEvents(args.calendar)
+        eventsListViewModel.findCalendarEvents(args.calendar)
         return root
     }
 

@@ -11,23 +11,23 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_navigation_home_to_navigation_dashboard"
-            app:destination="@id/navigation_dashboard" />
+            android:id="@+id/action_navigation_home_to_navigation_eventslist"
+            app:destination="@id/navigation_eventslist" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="org.wit.juggle.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard">
+        android:id="@+id/navigation_eventslist"
+        android:name="org.wit.juggle.ui.eventslist.EventsListFragment"
+        android:label="@string/title_eventslist"
+        tools:layout="@layout/fragment_eventslist">
     <argument
         android:name="calendar"
         app:argType="org.wit.juggle.models.CalendarModel" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="org.wit.juggle.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_addevent"
+        android:name="org.wit.juggle.ui.addevent.AddEventFragment"
+        android:label="@string/title_addevent"
+        tools:layout="@layout/fragment_addevent" />
 </navigation>

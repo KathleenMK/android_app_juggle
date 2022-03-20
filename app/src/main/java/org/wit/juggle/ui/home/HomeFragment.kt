@@ -153,7 +153,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
 
     override fun onCalendarClick(calendar: CalendarModel) {
         Timber.i("in onCalendar Click"+calendar.toString())
-        val action = HomeFragmentDirections.actionNavigationHomeToNavigationDashboard(calendar)
+        val action = HomeFragmentDirections.actionNavigationHomeToNavigationEventslist(calendar)
         findNavController().navigate(action)
     }
 

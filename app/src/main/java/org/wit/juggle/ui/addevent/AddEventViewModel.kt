@@ -1,10 +1,10 @@
-package org.wit.juggle.ui.notifications
+package org.wit.juggle.ui.addevent
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class AddEventViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

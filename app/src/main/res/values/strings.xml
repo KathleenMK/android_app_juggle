@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Juggle</string>
-    <string name="title_home">Calendars</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Home</string>
+    <string name="title_eventslist">Events List</string>
+    <string name="title_addevent">Add Event</string>
     <string name="title_signout">SignOut</string>
     <string name="title_revoke">Revoke</string>
 
