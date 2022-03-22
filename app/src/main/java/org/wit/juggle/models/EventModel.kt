@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class EventModel(
     val summary: String,
-    val id: String,
+    val id: String = "",
     //@SerializedName("start.dateTime")
     val start: Time,
     val end: Time,
-    val created: String
+    val created: String = ""
 ) : Parcelable
 
 @Parcelize
@@ -20,3 +20,10 @@ data class Time(
     val timeZone: String,
     val dateTime: String
 ): Parcelable
+
+@Parcelize
+data class AddEventModel(   //id and created not needed for inserting event
+    val summary: String,
+    val start: Time,
+    val end: Time,
+) : Parcelable

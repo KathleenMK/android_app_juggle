@@ -5,6 +5,7 @@
     <string name="title_addevent">Add Event</string>
     <string name="title_signout">SignOut</string>
     <string name="title_revoke">Revoke</string>
+    <string name="addRelatedEvent">Add Related Event</string>
 
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>

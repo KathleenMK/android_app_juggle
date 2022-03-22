@@ -1,26 +1,27 @@
 package org.wit.juggle.api
 
-import org.wit.juggle.models.CalendarListModel
-import retrofit2.http.GET
-import retrofit2.http.Headers
-import org.wit.juggle.models.CalendarModel
-import org.wit.juggle.models.EventListModel
-import org.wit.juggle.models.EventModel
+import org.wit.juggle.models.*
 import retrofit2.Call
-import retrofit2.http.Path
+import retrofit2.http.*
 
 
 interface GoogleCalendarApi {
 
-    @Headers(value = ["Authorization:Bearer "])
+    @Headers(value = ["Authorization:Bearer ***"])
     @GET("users/me/calendarList")
     fun getCalendars(): Call<CalendarListModel>
     //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarListModel>  //wk 9
 
 
-    @Headers(value = ["Authorization:Bearer "])
+    @Headers(value = ["Authorization:Bearer ***"])
     @GET("calendars/{calendarId}/events")
     fun getCalendarEvents(@Path("calendarId") calendarId:String): Call<EventListModel>
+
+    @Headers(value = ["Authorization:Bearer ***"])
+    @POST("calendars/***/events")
+    fun addRelatedEvent(@Body event: AddEventModel): Call<EventWrapper>
+    //: Call<EventListModel>
+
 
 //    @Headers(value = ["Authorization:Bearer "])
 //    @GET("calendars/{calendarId}/events/{eventId}")

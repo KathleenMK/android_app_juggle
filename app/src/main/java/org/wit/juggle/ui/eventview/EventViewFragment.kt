@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.juggle.R
 import org.wit.juggle.databinding.FragmentEventslistBinding
 import org.wit.juggle.databinding.FragmentEventviewBinding
-import org.wit.juggle.models.EventModel
 import org.wit.juggle.ui.eventslist.EventsListFragmentArgs
 import org.wit.juggle.ui.eventslist.EventsListViewModel
 import org.wit.juggle.utils.createTickTock
@@ -23,8 +22,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import org.wit.juggle.adapters.EventAdapter
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
-import org.wit.juggle.models.CalendarManager
-import org.wit.juggle.models.CalendarModel
+import org.wit.juggle.models.*
 
 
 class EventViewFragment : Fragment() {
@@ -54,6 +52,15 @@ class EventViewFragment : Fragment() {
 
         _binding = FragmentEventviewBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.addRelatedEventBtn.setOnClickListener(){
+            Timber.i("in my new button")
+            eventViewViewModel.addRelatedEvent(
+                AddEventModel(summary = "might this work",
+                start = Time(timeZone="Europe/London", dateTime="2022-03-22T20:10:00Z"),
+                end = Time(timeZone="Europe/London", dateTime="2022-03-22T20:20:00Z"))
+            )
+        }
 
       //  ticktock = createTickTock(requireActivity())
 
