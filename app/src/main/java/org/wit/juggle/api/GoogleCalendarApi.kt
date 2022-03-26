@@ -7,27 +7,18 @@ import retrofit2.http.*
 
 interface GoogleCalendarApi {
 
-    @Headers(value = ["Authorization:Bearer ***"])
     @GET("users/me/calendarList")
-    fun getCalendars(): Call<CalendarListModel>
-    //suspend fun getCalendarList(@Header("Authorization") token : String): Response<CalendarListModel>  //wk 9
+    fun getCalendars(@Header("Authorization") token : String): Call<CalendarListModel>
 
-
-    @Headers(value = ["Authorization:Bearer ***"])
     @GET("calendars/{calendarId}/events")
-    fun getCalendarEvents(@Path("calendarId") calendarId:String): Call<EventListModel>
+    fun getCalendarEvents(@Header("Authorization") token : String, @Path("calendarId") calendarId:String): Call<EventListModel>
 
-    @Headers(value = ["Authorization:Bearer ***"])
-    @POST("calendars/***/events")
-    fun addRelatedEvent(@Body event: AddEventModel): Call<EventWrapper>
-    //: Call<EventListModel>
+    @POST("calendars/{calendarId}/events")
+    fun addRelatedEvent(@Header("Authorization") token : String, @Path("calendarId") calendarId:String, @Body event: AddEventModel): Call<EventWrapper>
 
 
-//    @Headers(value = ["Authorization:Bearer "])
-//    @GET("calendars/{calendarId}/events/{eventId}")
-//    fun getEvent(@Path("calendarId") calendarId:String, @Path("eventId") eventId:String): Call<EventModel>
 
-// attempt to get at the access token, currently hardcoded above
+// attempt to get at the access token, currently hardcoded in secret strings
 //    @Headers(value = ["grant_type: authorization_code",
 //        "client_id: ***",
 //        "client_secret: ",

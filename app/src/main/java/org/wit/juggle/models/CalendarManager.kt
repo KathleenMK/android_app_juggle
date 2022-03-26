@@ -11,9 +11,9 @@ import timber.log.Timber
 object CalendarManager : CalendarStore {
 
 
-    override fun findCalendars(calendars: MutableLiveData<List<CalendarModel>>) {
+    override fun findCalendars(token:String, calendars: MutableLiveData<List<CalendarModel>>) {
 
-        val call = RetrofitHelper.getApi().getCalendars()
+        val call = RetrofitHelper.getApi().getCalendars(token)
 
         call.enqueue(object : Callback<CalendarListModel> {
 
@@ -33,9 +33,9 @@ object CalendarManager : CalendarStore {
 
     }
 
-    override fun findCalendarEvents(calendar: CalendarModel, events: MutableLiveData<List<EventModel>>) {
+    override fun findCalendarEvents(token:String, calendar: CalendarModel, events: MutableLiveData<List<EventModel>>) {
 
-        val call = RetrofitHelper.getApi().getCalendarEvents(calendar.id)
+        val call = RetrofitHelper.getApi().getCalendarEvents(token, calendar.id)
 
         call.enqueue(object : Callback<EventListModel> {
 
@@ -44,7 +44,9 @@ object CalendarManager : CalendarStore {
                 response: Response<EventListModel>
             ) {
                 val eventListModelValue = response.body() as EventListModel
-                events.value = eventListModelValue.items as ArrayList<EventModel>
+                val eventListItems = eventListModelValue.items.reversed() as ArrayList<EventModel>
+                events.value = eventListItems
+
                 Timber.i("Retrofit JSON = ${response.body()}")
             }
 
@@ -55,9 +57,9 @@ object CalendarManager : CalendarStore {
 
     }
 
-    override fun addRelatedEvent(event: AddEventModel) {
+    override fun addRelatedEvent(token:String, calendarId: String, event: AddEventModel) {
 
-        val call = RetrofitHelper.getApi().addRelatedEvent(event)
+        val call = RetrofitHelper.getApi().addRelatedEvent(token, calendarId, event)
         Timber.i(event.toString())
         call.enqueue(object : Callback<EventWrapper> {
             override fun onResponse(call: Call<EventWrapper>,

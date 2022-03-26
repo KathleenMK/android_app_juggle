@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import org.wit.juggle.R
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
 import org.wit.juggle.models.CalendarManager
 import org.wit.juggle.models.CalendarModel
@@ -30,10 +31,11 @@ class EventsListViewModel (app: Application) : AndroidViewModel(app) {
 
     val text: LiveData<String> = _text
 
+    val token = app!!.getString(R.string.temp_bearer_access_token)
 
     fun findCalendarEvents(calendar:CalendarModel) {
         try {
-            CalendarManager.findCalendarEvents(calendar, events)
+            CalendarManager.findCalendarEvents(token, calendar, events)
             Timber.i("Retrofit Success : $events.value")
         }
         catch (e: Exception) {

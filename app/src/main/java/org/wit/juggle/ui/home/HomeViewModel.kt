@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseUser
+import org.wit.juggle.R
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
 import org.wit.juggle.models.CalendarManager
 import org.wit.juggle.models.CalendarModel
@@ -34,11 +35,13 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
 
     val text: LiveData<String> = _text
 
+    val token = app!!.getString(R.string.temp_bearer_access_token)
+
     init { load() }
 
     fun load() {
         try {
-            CalendarManager.findCalendars(calendars)
+            CalendarManager.findCalendars(token,calendars)
             Timber.i("Retrofit Success : $calendars.value")
         }
         catch (e: Exception) {

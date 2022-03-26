@@ -55,10 +55,10 @@ class EventViewFragment : Fragment() {
 
         binding.addRelatedEventBtn.setOnClickListener(){
             Timber.i("in my new button")
-            eventViewViewModel.addRelatedEvent(
-                AddEventModel(summary = "might this work",
-                start = Time(timeZone="Europe/London", dateTime="2022-03-22T20:10:00Z"),
-                end = Time(timeZone="Europe/London", dateTime="2022-03-22T20:20:00Z"))
+            eventViewViewModel.addRelatedEvent("",
+                AddEventModel(summary = binding.newEventSummary.text.toString(),
+                start = Time(timeZone="Europe/London", dateTime="2022-03-24T20:10:00Z"),
+                end = Time(timeZone="Europe/London", dateTime="2022-03-24T20:20:00Z"))
             )
         }
 
