@@ -9,212 +9,350 @@
         <variable
             name="calendar"
             type="org.wit.juggle.models.CalendarModel" />
+
         <variable
             name="event"
             type="org.wit.juggle.models.EventModel" />
     </data>
 
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.eventview.EventViewFragment">
-
-    <TextView
-        android:id="@+id/text_eventview"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".ui.eventview.EventViewFragment">
 
         <TextView
-            android:id="@+id/calendarSummaryHeading"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_eventview"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/calendarSummaryHeading"
-            android:textStyle="bold|italic" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/calendarSummary"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{calendar.summary}"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/eventSummary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@{event.summary}"
-        android:textStyle="bold" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/design_default_color_secondary">
 
-<!--        <TextView-->
-<!--            android:id="@+id/eventStart"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{event.start.dateTime.toString()}"-->
-<!--            android:textStyle="bold" />-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/eventStartDateHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventStartDateHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/calendarSummaryHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/calendarSummaryHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/eventStartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/calendarSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/calendarSummaryHeading"
+                        android:text="@{calendar.summary}"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/eventStartTimeHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventStartTimeHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/eventSummaryHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventSummaryHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/calendarSummaryHeading" />
 
-        <TextView
-            android:id="@+id/eventStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
-<!--        <TextView-->
-<!--            android:id="@+id/eventEnd"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{event.end.dateTime.toString()}"-->
-<!--            android:textStyle="bold" />-->
+                    <TextView
+                        android:id="@+id/eventSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventSummaryHeading"
+                        android:text="@{event.summary}"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/calendarSummary" />
 
-        <TextView
-            android:id="@+id/eventEndDateHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventEndDateHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/eventStartDateHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventStartDateHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/eventSummaryHeading" />
 
-        <TextView
-            android:id="@+id/eventEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/eventStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventStartDateHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/eventSummary" />
 
-        <TextView
-            android:id="@+id/eventEndTimeHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventEndTimeHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/eventStartTimeHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventStartTimeHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/eventStartDateHeading" />
 
-        <TextView
-            android:id="@+id/eventEndTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/eventStartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventStartTimeHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/eventStartDate" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/eventCreated"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{event.created.toString()}"-->
-<!--            android:textStyle="bold" />-->
+                    <TextView
+                        android:id="@+id/eventEndDateHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventEndDateHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/eventStartTimeHeading" />
 
-        <TextView
-            android:id="@+id/createdDateHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventCreatedDateHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/eventEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventEndDateHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/eventStartTime" />
 
-        <TextView
-            android:id="@+id/createdDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/eventEndTimeHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventEndTimeHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/eventEndDateHeading" />
 
-        <TextView
-            android:id="@+id/createdTimeHeading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/eventCreatedTimeHeading"
-            android:textStyle="bold|italic" />
+                    <TextView
+                        android:id="@+id/eventEndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventEndTimeHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/eventEndDate" />
 
-        <TextView
-            android:id="@+id/createdTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/createdDateHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventCreatedDateHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/eventEndTimeHeading" />
 
-        <EditText
-            android:id="@+id/newEventSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_newEventSummary"
-            android:text="@{event.summary}" />
+                    <TextView
+                        android:id="@+id/createdDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventCreatedDateHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/eventEndTime" />
 
-        <!--        <TimePicker-->
-        <!--            android:id="@+id/newEventStartTimePicker"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="63dp"-->
-        <!--            android:timePickerMode="spinner" />-->
+                    <TextView
+                        android:id="@+id/createdTimeHeading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/eventCreatedTimeHeading"
+                        android:textStyle="bold|italic"
+                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
+                        app:layout_constraintTop_toBottomOf="@+id/createdDateHeading" />
 
-        <!--        <DatePicker-->
-        <!--            android:id="@+id/newEventStartDatePicker"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="70dp"-->
-        <!--            android:calendarViewShown="false"-->
-        <!--            android:datePickerMode="spinner"-->
-        <!--            android:padding="-50dp"-->
-        <!--            android:scaleX="0.50"-->
-        <!--            android:scaleY="0.50" />-->
-
-        <EditText
-            android:id="@+id/newEventStartDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_newEventStartDate"
-            android:inputType="date" />
-
-        <EditText
-            android:id="@+id/newEventStartTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_newEventStartTime" />
-
-        <EditText
-            android:id="@+id/newEventEndDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_newEventEndDate" />
-
-        <EditText
-            android:id="@+id/newEventEndTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_newEventEndTime" />
-
-        <Button
-            android:id="@+id/addRelatedEventBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/addRelatedEvent" />
+                    <TextView
+                        android:id="@+id/createdTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/eventCreatedTimeHeading"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
+                        app:layout_constraintTop_toBottomOf="@+id/createdDate" />
 
 
-    </LinearLayout>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineHeadings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="8dp" />
 
-</FrameLayout>
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="120dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardNewEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/newEventHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:lineSpacingExtra="20sp"
+                        android:text="@string/addNewEventHeading"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/newEventSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_newEventSummary"
+                        android:minHeight="40dp"
+                        android:text="@{event.summary}"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventHeading" />
+
+                    <!--        <TimePicker-->
+                    <!--            android:id="@+id/newEventStartTimePicker"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="63dp"-->
+                    <!--            android:timePickerMode="spinner" />-->
+
+                    <!--        <DatePicker-->
+                    <!--            android:id="@+id/newEventStartDatePicker"-->
+                    <!--            android:layout_width="wrap_content"-->
+                    <!--            android:layout_height="70dp"-->
+                    <!--            android:calendarViewShown="false"-->
+                    <!--            android:datePickerMode="spinner"-->
+                    <!--            android:padding="-50dp"-->
+                    <!--            android:scaleX="0.50"-->
+                    <!--            android:scaleY="0.50" />-->
+
+                    <EditText
+                        android:id="@+id/newEventStartDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_newEventStartDate"
+                        android:inputType="date"
+                        android:minHeight="40dp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventSummary" />
+
+                    <EditText
+                        android:id="@+id/newEventStartTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_newEventStartTime"
+                        android:minHeight="40dp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventStartDate" />
+
+                    <EditText
+                        android:id="@+id/newEventEndDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_newEventEndDate"
+                        android:minHeight="40dp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventStartTime" />
+
+                    <EditText
+                        android:id="@+id/newEventEndTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_newEventEndTime"
+                        android:minHeight="40dp"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndDate" />
+
+                    <Button
+                        android:id="@+id/addRelatedEventBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/addRelatedEvent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTime" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </FrameLayout>
 </layout>
