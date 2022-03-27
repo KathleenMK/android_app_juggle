@@ -26,5 +26,18 @@
 
     <string name="tickTockText">Getting Calendar Stuff…</string>
 
-
+    <!-- Event View Fragment -->
+    <string name="calendarSummaryHeading">Calendar:</string>
+    <string name="eventSummaryHeading">Event Summary:</string>
+    <string name="eventStartDateHeading">Start Date:</string>
+    <string name="eventStartTimeHeading">Start Time:</string>
+    <string name="eventEndDateHeading">End Date:</string>
+    <string name="eventEndTimeHeading">End Time:</string>
+    <string name="eventCreatedDateHeading">Created Date:</string>
+    <string name="eventCreatedTimeHeading">Created Time:</string>
+    <string name="hint_newEventSummary">New Event Summary</string>
+    <string name="hint_newEventStartDate">New Event Start Date</string>
+    <string name="hint_newEventStartTime">New Event Start Time</string>
+    <string name="hint_newEventEndDate">New Event End Date</string>
+    <string name="hint_newEventEndTime">New Event End Time</string>
 </resources>

@@ -35,7 +35,7 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
 
     val text: LiveData<String> = _text
 
-    val token = app!!.getString(R.string.temp_bearer_access_token)
+    val token = app.getString(R.string.temp_bearer_access_token)
 
     init { load() }
 

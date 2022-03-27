@@ -55,10 +55,12 @@ class EventViewFragment : Fragment() {
 
         binding.addRelatedEventBtn.setOnClickListener(){
             Timber.i("in my new button")
-            eventViewViewModel.addRelatedEvent("",
+            eventViewViewModel.addRelatedEvent("primary",
                 AddEventModel(summary = binding.newEventSummary.text.toString(),
-                start = Time(timeZone="Europe/London", dateTime="2022-03-24T20:10:00Z"),
-                end = Time(timeZone="Europe/London", dateTime="2022-03-24T20:20:00Z"))
+                start = Time(timeZone="Europe/Dublin",
+                    dateTime=binding.newEventStartDate.text.toString()+"T"+binding.newEventStartTime.text.toString()),
+                end = Time(timeZone="Europe/Dublin",
+                    dateTime=binding.newEventEndDate.text.toString()+"T"+binding.newEventEndTime.text.toString()))
             )
         }
 
@@ -100,5 +102,15 @@ class EventViewFragment : Fragment() {
         binding.calendar = args.calendar
         binding.event = args.event
 
+        binding.eventStartDate.setText(args.event.start.dateTime.split('T')[0])
+        binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1])
+        binding.eventEndDate.setText(args.event.end.dateTime.split('T')[0])
+        binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1])
+        binding.createdTime.setText(args.event.created.split('T')[1])
+        binding.createdDate.setText(args.event.created.split('T')[0])
+        binding.newEventStartDate.setText(args.event.start.dateTime.split('T')[0])
+        binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1])
+        binding.newEventEndDate.setText(args.event.end.dateTime.split('T')[0])
+        binding.newEventEndTime.setText(args.event.end.dateTime.split('T')[1])
     }
 }
