@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,7 +30,11 @@ import org.wit.juggle.api.GoogleCalendarApi
 import org.wit.juggle.api.RetrofitHelper
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
+import org.wit.juggle.models.AddEventModel
 import org.wit.juggle.models.CalendarModel
+import org.wit.juggle.models.Time
+import org.wit.juggle.models.UserModel
+import org.wit.juggle.ui.signin.SignedInViewModel
 import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
@@ -41,6 +46,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
 
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
+    private val signedInViewModel: SignedInViewModel by activityViewModels()
 
 
     // This property is only valid between onCreateView and
@@ -102,6 +108,12 @@ class HomeFragment : Fragment(), CalendarClickListener {
         //val intent = Intent(this, GrabberLogin::class.java)
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         //startActivity(intent)
+
+        binding.saveUserBtn.setOnClickListener(){
+            Timber.i("in my new button")
+            homeViewModel.saveUser(signedInViewModel.liveFirebaseUser,arrayListOf("test@gmail.com"), arrayListOf("testing@gmail.com","test@gmail.com"))
+        }
+
         return root
     }
 

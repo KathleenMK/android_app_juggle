@@ -8,12 +8,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseUser
 import org.wit.juggle.R
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
+import org.wit.juggle.firebaseintegration.FirebaseDB
 import org.wit.juggle.models.CalendarManager
 import org.wit.juggle.models.CalendarModel
+import org.wit.juggle.models.UserModel
 import timber.log.Timber
 
 //class HomeViewModel : ViewModel() {
-class HomeViewModel (app: Application) : AndroidViewModel(app) {
+class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is home Fragment"
@@ -22,10 +24,11 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
     //var googleSignInAccount = MutableLiveData<GoogleSignInAccount>()
     //var googleSignInClient = MutableLiveData<GoogleSignInClient>()
 
-    var firebaseAuthorization : FirebaseAuthorization = FirebaseAuthorization(app)
-    var liveFirebaseUser : MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
-    var loggedOut : MutableLiveData<Boolean> = firebaseAuthorization.loggedOut
+    var firebaseAuthorization: FirebaseAuthorization = FirebaseAuthorization(app)
+    var liveFirebaseUser: MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
+    var loggedOut: MutableLiveData<Boolean> = firebaseAuthorization.loggedOut
     var googleSignInClient = MutableLiveData<GoogleSignInClient>()
+
 
     private val calendars =
         MutableLiveData<List<CalendarModel>>()
@@ -37,15 +40,29 @@ class HomeViewModel (app: Application) : AndroidViewModel(app) {
 
     val token = app.getString(R.string.temp_bearer_access_token)
 
-    init { load() }
+    init {
+        load()
+    }
 
     fun load() {
         try {
-            CalendarManager.findCalendars(token,calendars)
+            CalendarManager.findCalendars(token, calendars)
             Timber.i("Retrofit Success : $calendars.value")
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             Timber.i("Retrofit Error : $e.message")
         }
+    }
+
+    fun saveUser(
+        firebaseUser: MutableLiveData<FirebaseUser>,
+        jugglers: ArrayList<String>,
+        juggled: ArrayList<String>
+    ) {
+        try {
+            FirebaseDB.saveUser(firebaseUser, jugglers, juggled)
+        } catch (e: IllegalArgumentException) {
+            Timber.i(e.toString())
+        }
+
     }
 }
