@@ -112,6 +112,8 @@ class HomeFragment : Fragment(), CalendarClickListener {
         binding.saveUserBtn.setOnClickListener(){
             Timber.i("in my new button")
             homeViewModel.saveUser(signedInViewModel.liveFirebaseUser,arrayListOf("test@gmail.com"), arrayListOf("testing@gmail.com","test@gmail.com"))
+            val action = HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+            findNavController().navigate(action)
         }
 
         return root

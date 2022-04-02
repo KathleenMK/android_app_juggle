@@ -33,9 +33,9 @@ object CalendarManager : CalendarStore {
 
     }
 
-    override fun findCalendarEvents(token:String, calendar: CalendarModel, events: MutableLiveData<List<EventModel>>) {
+    override fun findCalendarEvents(token:String, calendarId: String, events: MutableLiveData<List<EventModel>>) {
 
-        val call = RetrofitHelper.getApi().getCalendarEvents(token, calendar.id)
+        val call = RetrofitHelper.getApi().getCalendarEvents(token, calendarId)
 
         call.enqueue(object : Callback<EventListModel> {
 
@@ -53,6 +53,10 @@ object CalendarManager : CalendarStore {
             override fun onFailure(call: Call<EventListModel>, t: Throwable) {
                 Timber.i("Retrofit Error : $t.message")
             }
+
+
+
+
         })
 
     }

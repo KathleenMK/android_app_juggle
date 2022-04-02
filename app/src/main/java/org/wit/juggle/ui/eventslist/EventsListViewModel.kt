@@ -33,9 +33,9 @@ class EventsListViewModel (app: Application) : AndroidViewModel(app) {
 
     val token = app.getString(R.string.temp_bearer_access_token)
 
-    fun findCalendarEvents(calendar:CalendarModel) {
+    fun findCalendarEvents(calendarId:String) {
         try {
-            CalendarManager.findCalendarEvents(token, calendar, events)
+            CalendarManager.findCalendarEvents(token, calendarId, events)
             Timber.i("Retrofit Success : $events.value")
         }
         catch (e: Exception) {

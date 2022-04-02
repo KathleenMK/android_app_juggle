@@ -24,6 +24,7 @@ import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccoun
 import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.ExponentialBackOff
 import com.google.api.services.calendar.CalendarScopes
+import org.wit.juggle.models.UserModel
 
 
 class FirebaseAuthorization (application: Application) {
@@ -32,6 +33,7 @@ class FirebaseAuthorization (application: Application) {
 
     var firebaseAuth: FirebaseAuth? = null
     var liveFirebaseUser = MutableLiveData<FirebaseUser>()
+    var liveUser = MutableLiveData<UserModel>()
     var loggedOut = MutableLiveData<Boolean>()
     var errorStatus = MutableLiveData<Boolean>()
     var googleSignInClient = MutableLiveData<GoogleSignInClient>()
@@ -39,8 +41,10 @@ class FirebaseAuthorization (application: Application) {
     init {
         this.application = application
         firebaseAuth = FirebaseAuth.getInstance()
+        Timber.i("in FirebaseAuthorization before init")
 
         if (firebaseAuth!!.currentUser != null) {
+            Timber.i("in FirebaseAuthorization init not null")
             liveFirebaseUser.postValue(firebaseAuth!!.currentUser)
             loggedOut.postValue(false)
             errorStatus.postValue(false)

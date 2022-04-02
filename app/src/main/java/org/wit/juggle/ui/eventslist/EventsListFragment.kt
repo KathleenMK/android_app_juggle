@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +20,7 @@ import org.wit.juggle.databinding.FragmentEventslistBinding
 import org.wit.juggle.models.CalendarModel
 import org.wit.juggle.models.EventModel
 import org.wit.juggle.ui.home.HomeFragmentDirections
+import org.wit.juggle.ui.signin.SignedInViewModel
 import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
@@ -29,6 +31,7 @@ class EventsListFragment : Fragment(), EventClickListener {
     private lateinit var eventsListViewModel: EventsListViewModel
     private val args by navArgs<EventsListFragmentArgs>()
     private var _binding: FragmentEventslistBinding? = null
+    private val signedInViewModel: SignedInViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -81,7 +84,14 @@ class EventsListFragment : Fragment(), EventClickListener {
 //                Timber.i("api reponse: "+result.body().toString())
 //        }
 
-        eventsListViewModel.findCalendarEvents(args.calendar)
+          if(args.calendar != null)
+        {
+            eventsListViewModel.findCalendarEvents(args.calendar!!.id)
+        }
+        else{
+              Timber.i("args.calendar is null")
+              eventsListViewModel.findCalendarEvents("primary")
+            }
         return root
     }
 
@@ -132,7 +142,7 @@ class EventsListFragment : Fragment(), EventClickListener {
 
     override fun onEventClick(event: EventModel) {
         Timber.i("in onEvent Click"+event.toString())
-        val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar,event)
+        val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar!!,event)
         findNavController().navigate(action)
     }
 }
