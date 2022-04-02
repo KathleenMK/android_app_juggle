@@ -126,11 +126,11 @@ class HomeFragment : Fragment(), CalendarClickListener {
 
             val jugglers = HashMap<String, String>()
             val juggled = HashMap<String, String>()
+            val aliases = arrayListOf<String>()
             var checkComplete = true
 
-             for (a in 0 until count) {
+            for (a in 0 until count) {
                 Timber.i(a.toString())
-                val aliases = arrayListOf<String>()
                 val holder =
                     binding.recyclerViewCalendars.findViewHolderForLayoutPosition(a)
                 if (holder != null) {
@@ -139,18 +139,16 @@ class HomeFragment : Fragment(), CalendarClickListener {
 
                     val role =
                         holder.itemView.findViewById<View>(R.id.role_spinner) as Spinner
-                    //Timber.i(role.selectedItem.toString())
                     val aliasEntry =
                         holder.itemView.findViewById<View>(R.id.calendarAlias) as TextView
                     val alias = aliasEntry.text.toString()
-                    aliases.add(alias.uppercase())
                     if (role.selectedItemPosition != 0 && (alias.isEmpty()
                                 || aliases.contains(alias.uppercase()))
                     ) {
                         checkComplete = false
                         break
                     }
-                    //Timber.i(alias.text.toString())
+                    aliases.add(alias.uppercase())
                     if (role.selectedItem.toString() == "Juggled") {
                         juggled.put(alias, calendarId.text.toString())
                     }
@@ -228,7 +226,6 @@ class HomeFragment : Fragment(), CalendarClickListener {
             Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
         }
     }
-
 
 
     companion object {
