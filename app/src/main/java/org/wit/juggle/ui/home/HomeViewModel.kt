@@ -36,6 +36,12 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
     val observableCalendars: LiveData<List<CalendarModel>>
         get() = calendars
 
+    val user =
+        MutableLiveData<UserModel>()
+
+    val observableUser: LiveData<UserModel>
+        get() = user
+
     val text: LiveData<String> = _text
 
     val token = app.getString(R.string.temp_bearer_access_token)
@@ -55,11 +61,23 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     fun saveUser(
         firebaseUser: MutableLiveData<FirebaseUser>,
-        jugglers: ArrayList<Pair<String,String>>,
-        juggled: ArrayList<Pair<String,String>>
+        jugglers: HashMap<String,String>,
+        juggled: HashMap<String,String>
     ) {
         try {
             FirebaseDB.saveUser(firebaseUser, jugglers, juggled)
+        } catch (e: IllegalArgumentException) {
+            Timber.i(e.toString())
+        }
+
+    }
+
+    fun getUser(
+        firebaseUser: MutableLiveData<FirebaseUser>
+    ) {
+        try {
+            FirebaseDB.getUser(firebaseUser, user)
+            Timber.i("Firebase DB User Success : "+user.value?.userUid)
         } catch (e: IllegalArgumentException) {
             Timber.i(e.toString())
         }

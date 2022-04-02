@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.material.snackbar.Snackbar
 import com.google.api.client.extensions.android.http.AndroidHttp
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.json.jackson2.JacksonFactory
@@ -43,7 +44,9 @@ import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
-
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 class HomeFragment : Fragment(), CalendarClickListener {
@@ -57,7 +60,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    lateinit var ticktock : AlertDialog
+    lateinit var ticktock: AlertDialog
 
 
     override fun onCreateView(
@@ -79,18 +82,25 @@ class HomeFragment : Fragment(), CalendarClickListener {
         })
 
         binding.recyclerViewCalendars.layoutManager = LinearLayoutManager(activity)
-        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
-            calendars?.let { render(calendars as ArrayList<CalendarModel>) }
+//        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
+//            calendars?.let { render(calendars as ArrayList<CalendarModel>) }
+//        })
+        binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())
+        showTickTock(ticktock, "Calendar Info on the way...")
+        homeViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
+            user?.let { binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString()) }
         })
-
-        showTickTock(ticktock,"Calendar Info on the way...")
-        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer {
-                calendars ->
+        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
             calendars?.let {
                 render(calendars as ArrayList<CalendarModel>)
                 hideTickTock(ticktock)
             }
         })
+
+//        homeViewModel.observableUser.observe(viewLifecycleOwner, Observer { user -> user?.let {render(
+//            user
+//        )} })
+
 
         //Toast.makeText(context, "home frag line 40", Toast.LENGTH_LONG).show()
         //Toast.makeText(context, homeViewModel.googleSignInClient.toString(), Toast.LENGTH_LONG).show()
@@ -108,43 +118,68 @@ class HomeFragment : Fragment(), CalendarClickListener {
 //            // Checking the results
 //                Timber.i("api reponse: "+result.body().toString())
 //        }
-        
-        //val intent = Intent(this, GrabberLogin::class.java)
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-        //startActivity(intent)
 
-        binding.saveUserBtn.setOnClickListener(){
+
+        binding.saveUserBtn.setOnClickListener() {
             val adapter = binding.recyclerViewCalendars.adapter as CalendarAdapter
             val count = adapter.itemCount
 
-            val jugglers = arrayListOf<Pair<String,String>>()
-            val juggled = arrayListOf<Pair<String,String>>()
+            val jugglers = HashMap<String, String>()
+            val juggled = HashMap<String, String>()
+            var checkComplete = true
 
-            // iterating through recycler view: https://gist.github.com/dominicthomas/1a0d6d7c81eb69e5ad56a62cb7bfd11d
-            for (a in 0 until count){
-                    Timber.i(a.toString())
-                val holder = binding.recyclerViewCalendars.findViewHolderForLayoutPosition(a)
+             for (a in 0 until count) {
+                Timber.i(a.toString())
+                val aliases = arrayListOf<String>()
+                val holder =
+                    binding.recyclerViewCalendars.findViewHolderForLayoutPosition(a)
                 if (holder != null) {
-                    val calendarId = holder.itemView.findViewById<View>(R.id.calendarId) as TextView
-                    val alias = holder.itemView.findViewById<View>(R.id.calendarAlias) as TextView
-                    //Timber.i(alias.text.toString())
-                    val role = holder.itemView.findViewById<View>(R.id.role_spinner) as Spinner
+                    val calendarId =
+                        holder.itemView.findViewById<View>(R.id.calendarId) as TextView
+
+                    val role =
+                        holder.itemView.findViewById<View>(R.id.role_spinner) as Spinner
                     //Timber.i(role.selectedItem.toString())
-                    if(role.selectedItem.toString()=="Juggled"){
-                        juggled.add(Pair(calendarId.text.toString(),alias.text.toString()))
+                    val aliasEntry =
+                        holder.itemView.findViewById<View>(R.id.calendarAlias) as TextView
+                    val alias = aliasEntry.text.toString()
+                    aliases.add(alias.uppercase())
+                    if (role.selectedItemPosition != 0 && (alias.isEmpty()
+                                || aliases.contains(alias.uppercase()))
+                    ) {
+                        checkComplete = false
+                        break
                     }
-                    if(role.selectedItem.toString()=="Juggler"){
-                        jugglers.add(Pair(calendarId.text.toString(),alias.text.toString()))
+                    //Timber.i(alias.text.toString())
+                    if (role.selectedItem.toString() == "Juggled") {
+                        juggled.put(alias, calendarId.text.toString())
+                    }
+                    if (role.selectedItem.toString() == "Juggler") {
+                        jugglers.put(alias, calendarId.text.toString())
                     }
                 }
             }
-            Timber.i("in my new button")
-            homeViewModel.saveUser(signedInViewModel.liveFirebaseUser,jugglers, juggled)
-            val action = HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
-            findNavController().navigate(action)
+
+            if (checkComplete) {
+                Timber.i("in my new button")
+                homeViewModel.saveUser(
+                    signedInViewModel.liveFirebaseUser,
+                    jugglers,
+                    juggled
+                )
+                //homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
+                val action =
+                    HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+                findNavController().navigate(action)
+            } else {
+                Snackbar.make(
+                    it,
+                    "each alias must be distinct and not blank",
+                    Snackbar.LENGTH_LONG
+                )
+                    .show()
+            }
         }
-
-
 
         return root
     }
@@ -155,7 +190,11 @@ class HomeFragment : Fragment(), CalendarClickListener {
     }
 
     private fun render(calendars: ArrayList<CalendarModel>) {
-      binding.recyclerViewCalendars.adapter = CalendarAdapter(calendars,this)
+        binding.recyclerViewCalendars.adapter = CalendarAdapter(calendars, this)
+        Timber.i("in HomeFragment render")
+        homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
+        binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())
+
 
 //        var mCredential: GoogleAccountCredential? = null
 //
@@ -185,10 +224,12 @@ class HomeFragment : Fragment(), CalendarClickListener {
         if (calendars.isEmpty()) {
             Toast.makeText(context, "No Calendars have been found...", Toast.LENGTH_LONG).show()
         } else {
-            Timber.i("Home fragment render"+calendars.toString())
+            Timber.i("Home fragment render" + calendars.toString())
             Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
         }
     }
+
+
 
     companion object {
         private const val TAG = "HomeFragment"
@@ -196,7 +237,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
     }
 
     override fun onCalendarClick(calendar: CalendarModel) {
-        Timber.i("in onCalendar Click"+calendar.toString())
+        Timber.i("in onCalendar Click" + calendar.toString())
         val action = HomeFragmentDirections.actionNavigationHomeToNavigationEventslist(calendar)
         findNavController().navigate(action)
     }
