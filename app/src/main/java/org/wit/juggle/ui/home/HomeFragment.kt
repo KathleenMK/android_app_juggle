@@ -117,8 +117,8 @@ class HomeFragment : Fragment(), CalendarClickListener {
             val adapter = binding.recyclerViewCalendars.adapter as CalendarAdapter
             val count = adapter.itemCount
 
-            val jugglers = arrayListOf<String>()
-            val juggled = arrayListOf<String>()
+            val jugglers = arrayListOf<Pair<String,String>>()
+            val juggled = arrayListOf<Pair<String,String>>()
 
             // iterating through recycler view: https://gist.github.com/dominicthomas/1a0d6d7c81eb69e5ad56a62cb7bfd11d
             for (a in 0 until count){
@@ -131,10 +131,10 @@ class HomeFragment : Fragment(), CalendarClickListener {
                     val role = holder.itemView.findViewById<View>(R.id.role_spinner) as Spinner
                     //Timber.i(role.selectedItem.toString())
                     if(role.selectedItem.toString()=="Juggled"){
-                        juggled.add(calendarId.text.toString())
+                        juggled.add(Pair(calendarId.text.toString(),alias.text.toString()))
                     }
                     if(role.selectedItem.toString()=="Juggler"){
-                        jugglers.add(calendarId.text.toString())
+                        jugglers.add(Pair(calendarId.text.toString(),alias.text.toString()))
                     }
                 }
             }

@@ -10,8 +10,8 @@ data class UserModel(
     //var uid: String? = "",
     var userUid: String? = "",
     var googleId: String = "",
-    var jugglers: ArrayList<String> = arrayListOf(),
-    var juggled: ArrayList<String> = arrayListOf()
+    var jugglers: ArrayList<Pair<String,String>> = arrayListOf(),
+    var juggled: ArrayList<Pair<String,String>> = arrayListOf()
 
 ) : Parcelable {
     @Exclude

@@ -55,8 +55,8 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     fun saveUser(
         firebaseUser: MutableLiveData<FirebaseUser>,
-        jugglers: ArrayList<String>,
-        juggled: ArrayList<String>
+        jugglers: ArrayList<Pair<String,String>>,
+        juggled: ArrayList<Pair<String,String>>
     ) {
         try {
             FirebaseDB.saveUser(firebaseUser, jugglers, juggled)
