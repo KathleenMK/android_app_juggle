@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -24,10 +26,12 @@ import com.google.api.client.util.ExponentialBackOff
 import com.google.api.services.calendar.CalendarScopes
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.wit.juggle.R
 import org.wit.juggle.adapters.CalendarAdapter
 import org.wit.juggle.adapters.CalendarClickListener
 import org.wit.juggle.api.GoogleCalendarApi
 import org.wit.juggle.api.RetrofitHelper
+import org.wit.juggle.databinding.CardCalendarBinding
 //import com.google.android.gms.auth.api.signin.JuggleSignIn
 import org.wit.juggle.databinding.FragmentHomeBinding
 import org.wit.juggle.models.AddEventModel
@@ -110,11 +114,37 @@ class HomeFragment : Fragment(), CalendarClickListener {
         //startActivity(intent)
 
         binding.saveUserBtn.setOnClickListener(){
+            val adapter = binding.recyclerViewCalendars.adapter as CalendarAdapter
+            val count = adapter.itemCount
+
+            val jugglers = arrayListOf<String>()
+            val juggled = arrayListOf<String>()
+
+            // iterating through recycler view: https://gist.github.com/dominicthomas/1a0d6d7c81eb69e5ad56a62cb7bfd11d
+            for (a in 0 until count){
+                    Timber.i(a.toString())
+                val holder = binding.recyclerViewCalendars.findViewHolderForLayoutPosition(a)
+                if (holder != null) {
+                    val calendarId = holder.itemView.findViewById<View>(R.id.calendarId) as TextView
+                    val alias = holder.itemView.findViewById<View>(R.id.calendarAlias) as TextView
+                    //Timber.i(alias.text.toString())
+                    val role = holder.itemView.findViewById<View>(R.id.role_spinner) as Spinner
+                    //Timber.i(role.selectedItem.toString())
+                    if(role.selectedItem.toString()=="Juggled"){
+                        juggled.add(calendarId.text.toString())
+                    }
+                    if(role.selectedItem.toString()=="Juggler"){
+                        jugglers.add(calendarId.text.toString())
+                    }
+                }
+            }
             Timber.i("in my new button")
-            homeViewModel.saveUser(signedInViewModel.liveFirebaseUser,arrayListOf("test@gmail.com"), arrayListOf("testing@gmail.com","test@gmail.com"))
+            homeViewModel.saveUser(signedInViewModel.liveFirebaseUser,jugglers, juggled)
             val action = HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
             findNavController().navigate(action)
         }
+
+
 
         return root
     }

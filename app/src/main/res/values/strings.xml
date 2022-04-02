@@ -6,6 +6,13 @@
     <string name="title_signout">SignOut</string>
     <string name="title_revoke">Revoke</string>
     <string name="addRelatedEvent">Add Related Event</string>
+    <string name="hint_alias">Enter an alias</string>
+    <string name="hint_role">pick a role</string>
+    <string-array name="role_array">
+        <item>Choose a role</item>
+        <item>Juggler</item>
+        <item>Juggled</item>
+    </string-array>
 
     <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>

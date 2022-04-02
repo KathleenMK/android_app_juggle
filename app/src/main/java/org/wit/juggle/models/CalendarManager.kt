@@ -22,7 +22,15 @@ object CalendarManager : CalendarStore {
                 response: Response<CalendarListModel>
             ) {
                 val calendarListModelValue = response.body() as CalendarListModel
-                calendars.value = calendarListModelValue.items as ArrayList<CalendarModel>
+                val allCalendars = calendarListModelValue.items as ArrayList<CalendarModel>
+                val ownerCalendars = ArrayList<CalendarModel>()
+                for (cal in allCalendars){
+                    if (cal.accessRole=="owner"){
+                        ownerCalendars.add(cal)
+                    }
+
+                }
+                calendars.value = ownerCalendars
                Timber.i("Retrofit JSON = ${response.body()}")
             }
 

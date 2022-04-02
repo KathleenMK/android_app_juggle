@@ -10,8 +10,9 @@ data class UserModel(
     //var uid: String? = "",
     var userUid: String? = "",
     var googleId: String = "",
-    var juggled: ArrayList<String> = arrayListOf(),
-    var jugglers: ArrayList<String> = arrayListOf()
+    var jugglers: ArrayList<String> = arrayListOf(),
+    var juggled: ArrayList<String> = arrayListOf()
+
 ) : Parcelable {
     @Exclude
     fun toMap(): Map<String, Any?> {    // required to handle JSON FB DB
@@ -19,8 +20,8 @@ data class UserModel(
             //"uid" to uid,
             "userUid" to userUid,
             "googleId" to googleId,
-            "juggled" to juggled,
-            "jugglers" to jugglers
+            "jugglers" to jugglers,
+            "juggled" to juggled
         )
     }
 }

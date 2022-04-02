@@ -74,15 +74,6 @@ class EventsListFragment : Fragment(), EventClickListener {
             }
         })
 
-//        val googleCalendarApi = RetrofitHelper.getInstance().create(GoogleCalendarApi::class.java)
-//        // launching a new coroutine
-//        GlobalScope.launch {
-//            val result = googleCalendarApi.getCalendarEventList()
-//            Timber.i(result.toString())
-//            if (result != null)
-//            // Checking the results
-//                Timber.i("api reponse: "+result.body().toString())
-//        }
 
           if(args.calendar != null)
         {

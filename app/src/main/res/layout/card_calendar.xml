@@ -28,13 +28,13 @@
                 android:text="@{calendar.summary}"
                 android:textStyle="bold" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/calendarId"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/calendarSummary"-->
-<!--                android:maxLines="1"-->
-<!--                android:text="@{calendar.id}" />-->
+            <TextView
+                android:id="@+id/calendarId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calendarSummary"
+                android:visibility="gone"
+                android:text="@{calendar.id}" />
 
             <TextView
                 android:id="@+id/calendarAccessRole"
@@ -43,6 +43,26 @@
                 android:layout_below="@id/calendarSummary"
                 android:maxLines="1"
                 android:text="@{calendar.accessRole}" />
+
+            <EditText
+                android:id="@+id/calendarAlias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_alias"
+                android:minHeight="40dp"
+                android:textSize="14sp"
+                android:layout_below="@id/role_spinner"
+                android:layout_alignParentEnd="true"/>
+
+            <Spinner
+                android:id="@+id/role_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_role"
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_below="@id/calendarSummary"
+                android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>
 

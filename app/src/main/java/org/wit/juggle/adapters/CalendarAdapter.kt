@@ -2,7 +2,10 @@ package org.wit.juggle.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
+import org.wit.juggle.R
 import org.wit.juggle.databinding.CardCalendarBinding
 import org.wit.juggle.models.CalendarModel
 
@@ -17,6 +20,18 @@ class CalendarAdapter constructor(private var calendars: ArrayList<CalendarModel
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardCalendarBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
+
+        val roleSpinner: Spinner = binding.roleSpinner
+        ArrayAdapter.createFromResource(
+            parent.context,
+            R.array.role_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            roleSpinner.adapter = adapter
+        }
 
         return MainHolder(binding)
     }
@@ -35,6 +50,8 @@ class CalendarAdapter constructor(private var calendars: ArrayList<CalendarModel
             binding.calendar = calendar
             binding.root.setOnClickListener { listener.onCalendarClick(calendar) }
             binding.executePendingBindings()
+
+
         }
     }
 }
