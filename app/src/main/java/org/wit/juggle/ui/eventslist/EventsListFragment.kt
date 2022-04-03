@@ -58,14 +58,19 @@ class EventsListFragment : Fragment(), EventClickListener {
         })
 
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(activity)
-        eventsListViewModel.observableEvents.observe(viewLifecycleOwner, Observer { events ->
-            events?.let { render(events as ArrayList<EventModel>) }
+//        eventsListViewModel.observableEvents.observe(viewLifecycleOwner, Observer { events ->
+//            events?.let { render(events as ArrayList<EventModel>) }
+//        })
+
+      //  Timber.i("eventslist Frag: "+args.calendar)
+
+        //binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.values.toString()) //.juggled!!.values.elementAt(0).toString())
+        showTickTock(ticktock,"Event Info on the way...")
+        eventsListViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
+            user?.let { binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString())
+                eventsListViewModel.findCalendarEvents(eventsListViewModel.observableUser.value?.juggled!!.values.elementAt(0))}
         })
 
-        Timber.i("eventslist Frag: "+args.calendar)
-
-
-        showTickTock(ticktock,"Event Info on the way...")
         eventsListViewModel.observableEvents.observe(viewLifecycleOwner, Observer {
                 events ->
             events?.let {
@@ -74,14 +79,17 @@ class EventsListFragment : Fragment(), EventClickListener {
             }
         })
 
+        eventsListViewModel.getUser(signedInViewModel.liveFirebaseUser)
 
           if(args.calendar != null)
         {
             eventsListViewModel.findCalendarEvents(args.calendar!!.id)
+
         }
         else{
               Timber.i("args.calendar is null")
-              eventsListViewModel.findCalendarEvents("primary")
+              Timber.i(eventsListViewModel.observableUser.value.toString())
+              //eventsListViewModel.findCalendarEvents("primary")
             }
         return root
     }
@@ -96,7 +104,8 @@ class EventsListFragment : Fragment(), EventClickListener {
     private fun render(events: ArrayList<EventModel>) {
         Timber.i("in DB Frag render :"+args.calendar)
         binding.recyclerViewEvents.adapter = EventAdapter(events,this)
-
+        //eventsListViewModel.getUser(signedInViewModel.liveFirebaseUser)
+        //binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.values.elementAt(0).toString())
 //        var mCredential: GoogleAccountCredential? = null
 //
 //        mCredential = GoogleAccountCredential.usingOAuth2(
@@ -133,6 +142,14 @@ class EventsListFragment : Fragment(), EventClickListener {
 
     override fun onEventClick(event: EventModel) {
         Timber.i("in onEvent Click"+event.toString())
+//        val eventCalendarSummary: String
+//        if (args.calendar == null){
+//            eventCalendarSummary = eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString()
+//        }
+//        else {
+//            eventCalendarSummary = args.calendar!!.summary.toString()
+//        }
+
         val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar!!,event)
         findNavController().navigate(action)
     }

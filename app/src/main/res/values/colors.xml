@@ -13,4 +13,8 @@
     <color name="dark_purple">#1f0322</color>
     <color name="celadon_green">#36827f</color>
     <color name="silver_sand">#C4CBCA</color>
+
+
+    <color name="juggle_pic_launcher_background">#1f0322</color>
+    <color name="juggle_text_launcher_background">#1f0322</color>
 </resources>

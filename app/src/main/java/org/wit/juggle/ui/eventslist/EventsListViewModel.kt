@@ -4,11 +4,15 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.FirebaseUser
 import org.wit.juggle.R
 import org.wit.juggle.firebaseintegration.FirebaseAuthorization
+import org.wit.juggle.firebaseintegration.FirebaseDB
 import org.wit.juggle.models.CalendarManager
 import org.wit.juggle.models.CalendarModel
 import org.wit.juggle.models.EventModel
+import org.wit.juggle.models.UserModel
 import timber.log.Timber
 
 //class EventsListViewModel : ViewModel() {
@@ -18,9 +22,9 @@ class EventsListViewModel (app: Application) : AndroidViewModel(app) {
     }
 
     var firebaseAuthorization : FirebaseAuthorization = FirebaseAuthorization(app)
-//    var liveFirebaseUser : MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
+    var liveFirebaseUser : MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
 //    var loggedOut : MutableLiveData<Boolean> = firebaseAuthorization.loggedOut
-//    var googleSignInClient = MutableLiveData<GoogleSignInClient>()
+    var googleSignInClient = MutableLiveData<GoogleSignInClient>()
 
 
     private val events =
@@ -28,6 +32,12 @@ class EventsListViewModel (app: Application) : AndroidViewModel(app) {
 
     val observableEvents: LiveData<List<EventModel>>
         get() = events
+
+    val user =
+        MutableLiveData<UserModel>()
+
+    val observableUser: LiveData<UserModel>
+        get() = user
 
     val text: LiveData<String> = _text
 
@@ -41,5 +51,17 @@ class EventsListViewModel (app: Application) : AndroidViewModel(app) {
         catch (e: Exception) {
             Timber.i("Retrofit Error : $e.message")
         }
+    }
+
+    fun getUser(
+        firebaseUser: MutableLiveData<FirebaseUser>
+    ) {
+        try {
+            FirebaseDB.getUser(firebaseUser, user)
+            Timber.i("Firebase DB User Success EventsList : "+user.value?.userUid)
+        } catch (e: IllegalArgumentException) {
+            Timber.i(e.toString())
+        }
+
     }
 }
