@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/activity_google_sign_in.xml" value="0.27853260869565216" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.3072916666666667" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.3072916666666667" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3072916666666667" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.3072916666666667" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/juggle.xml" value="0.3072916666666667" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/drawable/juggle_text_launcher_foreground.xml" value="0.38177083333333334" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/activity_google_sign_in.xml" value="0.22" />
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/activity_main.xml" value="0.2848731884057971" />
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/card_calendar.xml" value="0.21354166666666666" />
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/card_event.xml" value="0.10030395136778116" />
@@ -19,6 +25,7 @@
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/layout/ticktock.xml" value="0.24010416666666667" />
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/menu/bottom_nav_menu.xml" value="0.365625" />
         <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/menu/menu_juggle.xml" value="0.2234375" />
+        <entry key="..\:/CompSys2020/finalproject/Juggle/app/src/main/res/mipmap-anydpi-v26/juggle_pic_launcher_round.xml" value="0.38177083333333334" />
       </map>
     </option>
   </component>

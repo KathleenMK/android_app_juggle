@@ -13,8 +13,10 @@
         <item>Juggler</item>
         <item>Juggled</item>
     </string-array>
+    <string name="login_text">Juggle</string>
+    <string name="login_image">Login Image</string>
 
-    <!-- Sign-in status messages -->
+<!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>
     <string name="signing_in">Signing in…</string>

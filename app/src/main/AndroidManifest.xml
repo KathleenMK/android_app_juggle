@@ -19,6 +19,7 @@
         android:theme="@style/Theme.Juggle">
         <activity
             android:name=".ui.signin.JuggleSignIn"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

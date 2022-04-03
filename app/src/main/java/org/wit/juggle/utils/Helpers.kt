@@ -12,7 +12,7 @@ fun createTickTock(activity: FragmentActivity) : AlertDialog {
         .setView(R.layout.ticktock)
     var loader = loaderBuilder.create()
     loader.setTitle(R.string.app_name)
-    loader.setIcon(R.mipmap.ic_launcher_round)
+    loader.setIcon(R.mipmap.juggle_text_launcher_round)
 
     return loader
 }
