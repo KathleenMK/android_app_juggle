@@ -9,17 +9,43 @@
         android:id="@+id/navigation_home"
         android:name="org.wit.juggle.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_eventslist"
+            app:destination="@id/navigation_eventslist" />
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="org.wit.juggle.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_eventslist"
+        android:name="org.wit.juggle.ui.eventslist.EventsListFragment"
+        android:label="@string/title_eventslist"
+        tools:layout="@layout/fragment_eventslist">
+    <argument
+        android:name="calendar"
+        app:argType="org.wit.juggle.models.CalendarModel"
+        app:nullable="true"
+        android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_navigation_eventslist_to_eventViewFragment"
+            app:destination="@id/eventViewFragment" />
+    </fragment>
+
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="org.wit.juggle.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_addevent"
+        android:name="org.wit.juggle.ui.addevent.AddEventFragment"
+        android:label="@string/title_addevent"
+        tools:layout="@layout/fragment_addevent" />
+
+    <fragment
+        android:id="@+id/eventViewFragment"
+        android:name="org.wit.juggle.ui.eventview.EventViewFragment"
+        android:label="EventViewFragment">
+    <argument
+        android:name="calendar"
+        app:argType="org.wit.juggle.models.CalendarModel"/>
+        <argument
+            android:name="event"
+            app:argType="org.wit.juggle.models.EventModel" />
+    </fragment>
 </navigation>

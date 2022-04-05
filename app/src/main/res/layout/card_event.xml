@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="event"
+            type="org.wit.juggle.models.EventModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/eventSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@{event.summary}"
+                android:textStyle="bold" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/calendarId"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@id/calendarSummary"-->
+            <!--                android:maxLines="1"-->
+            <!--                android:text="@{calendar.id}" />-->
+
+            <TextView
+                android:id="@+id/eventStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventSummary"
+                android:maxLines="1"
+                android:text="@{event.start.dateTime.toString()}" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/eventEnd"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/eventStart"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="@{event.end.dateTime.toString()}" />-->
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

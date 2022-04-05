@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -31,6 +35,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 }
 
@@ -44,7 +49,60 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
+    // added 28Feb
+    implementation platform('com.google.firebase:firebase-bom:26.4.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
+    //added 05Mar22
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    // GSON
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
+    //added 06Mar22 https://developers.google.com/calendar/api/quickstart/java
+//    implementation 'com.google.api-client:google-api-client:1.33.0'
+//    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.32.1'
+//    implementation 'com.google.apis:google-api-services-calendar:v3-rev20211026-1.32.1'
+
+    //implementation 'com.google.apis:google-api-services-calendar:v3-rev260-1.23.0' exclude module: 'httpclient'
+   // implementation 'com.google.api-client:google-api-client-android:1.23.0' exclude module: 'httpclient'
+    //implementation 'com.google.http-client:google-http-client-gson:1.23.0' exclude module: 'httpclient'
+
+    //taken from https://github.com/andhikayuana/google-calendar-demo/blob/master/app/build.gradle 12Mar22
+
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //**implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'pub.devrel:easypermissions:1.2.0'
+    implementation('com.google.api-client:google-api-client-android:1.30.5') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation('com.google.apis:google-api-services-calendar:v3-rev310-1.23.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //added 13Mar22
+    implementation 'com.google.code.gson:gson:2.8.9'
+
 }
