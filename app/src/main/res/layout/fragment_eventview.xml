@@ -208,27 +208,27 @@
                         app:layout_constraintStart_toStartOf="@id/guidelineDetail"
                         app:layout_constraintTop_toBottomOf="@+id/eventEndTime" />
 
-                    <TextView
-                        android:id="@+id/createdTimeHeading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/eventCreatedTimeHeading"
-                        android:textStyle="bold|italic"
-                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"
-                        app:layout_constraintTop_toBottomOf="@+id/createdDateHeading" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/createdTimeHeading"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="@string/eventCreatedTimeHeading"-->
+<!--                        android:textStyle="bold|italic"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/createdDateHeading" />-->
 
-                    <TextView
-                        android:id="@+id/createdTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
-                        android:hint="@string/eventCreatedTimeHeading"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"
-                        app:layout_constraintTop_toBottomOf="@+id/createdDate" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/createdTime"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="4dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:hint="@string/eventCreatedTimeHeading"-->
+<!--                        android:textStyle="bold"-->
+<!--                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/createdDate" />-->
 
 
                     <androidx.constraintlayout.widget.Guideline
@@ -350,8 +350,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/newEventEndTime" />
 
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewRelatedEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/cardNewEvent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
         </LinearLayout>
 
     </FrameLayout>

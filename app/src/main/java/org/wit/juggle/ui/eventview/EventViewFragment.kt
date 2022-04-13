@@ -6,26 +6,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.wit.juggle.R
-import org.wit.juggle.databinding.FragmentEventslistBinding
 import org.wit.juggle.databinding.FragmentEventviewBinding
-import org.wit.juggle.ui.eventslist.EventsListFragmentArgs
-import org.wit.juggle.ui.eventslist.EventsListViewModel
-import org.wit.juggle.utils.createTickTock
-import org.wit.juggle.utils.hideTickTock
-import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
-import android.app.Application
 import androidx.lifecycle.*
-import org.wit.juggle.adapters.EventAdapter
-import org.wit.juggle.firebaseintegration.FirebaseAuthorization
+import androidx.navigation.fragment.findNavController
+import org.wit.juggle.adapters.RelatedEventAdapter
+import org.wit.juggle.adapters.RelatedEventClickListener
 import org.wit.juggle.models.*
+import org.wit.juggle.ui.eventslist.EventsListFragmentDirections
 
 
-class EventViewFragment : Fragment() {
+class EventViewFragment : Fragment(), RelatedEventClickListener {
 
 //    companion object {
 //        fun newInstance() = EventViewFragment()
@@ -53,6 +46,8 @@ class EventViewFragment : Fragment() {
         _binding = FragmentEventviewBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.recyclerViewRelatedEvents.layoutManager = LinearLayoutManager(activity)
+
         binding.addRelatedEventBtn.setOnClickListener(){
             Timber.i("in my new button")
             eventViewViewModel.addRelatedEvent(args.event.id, "primary",
@@ -64,9 +59,9 @@ class EventViewFragment : Fragment() {
             )
         }
 
-//        eventViewViewModel.observableRelatedEvents.observe(viewLifecycleOwner, Observer { relatedEvents ->
-//            relatedEvents?.let { renderRelatedEvents() }
-//        })
+        eventViewViewModel.observableRelatedEvents.observe(viewLifecycleOwner, Observer { relatedEvents ->
+            relatedEvents?.let { renderRelatedEvents(relatedEvents as ArrayList<RelatedEventModel>) }
+        })          //constantly updating even without changes
 
 
         //  ticktock = createTickTock(requireActivity())
@@ -88,7 +83,8 @@ class EventViewFragment : Fragment() {
 
         //eventViewViewModel.findEvent(args.calendar,args.event)
        render()
-        renderRelatedEvents()   //renders but does not upon addition of new event
+        eventViewViewModel.getRelatedEvents(args.event.id)  // doesn't update upon new addtiona
+        //renderRelatedEvents()   //renders but does not upon addition of new event
         return root
     }
 
@@ -112,19 +108,35 @@ class EventViewFragment : Fragment() {
         binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1])
         binding.eventEndDate.setText(args.event.end.dateTime.split('T')[0])
         binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1])
-        binding.createdTime.setText(args.event.created.split('T')[1])
+        //binding.createdTime.setText(args.event.created.split('T')[1])
         binding.createdDate.setText(args.event.created.split('T')[0])
         binding.newEventStartDate.setText(args.event.start.dateTime.split('T')[0])
         binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1])
         binding.newEventEndDate.setText(args.event.end.dateTime.split('T')[0])
         binding.newEventEndTime.setText(args.event.end.dateTime.split('T')[1])
 
+
          }
 
 
-    private fun renderRelatedEvents() {
+    private fun renderRelatedEvents(relatedEvents: ArrayList<RelatedEventModel>) {
 
-        eventViewViewModel.getRelatedEvents(args.event.id)
+        //eventViewViewModel.getRelatedEvents(args.event.id)
+        binding.recyclerViewRelatedEvents.adapter = RelatedEventAdapter(relatedEvents, this)
         Timber.i("related events"+eventViewViewModel.observableRelatedEvents.value.toString())
+    }
+
+    override fun onEventClick(relatedEvent: RelatedEventModel) {
+        Timber.i("in onEvent Click"+relatedEvent.toString())
+//        val eventCalendarSummary: String
+//        if (args.calendar == null){
+//            eventCalendarSummary = eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString()
+//        }
+//        else {
+//            eventCalendarSummary = args.calendar!!.summary.toString()
+//        }
+
+        //val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar!!,event)
+        //indNavController().navigate(action)
     }
 }
