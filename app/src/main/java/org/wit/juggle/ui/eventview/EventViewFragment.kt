@@ -55,7 +55,7 @@ class EventViewFragment : Fragment() {
 
         binding.addRelatedEventBtn.setOnClickListener(){
             Timber.i("in my new button")
-            eventViewViewModel.addRelatedEvent("primary",
+            eventViewViewModel.addRelatedEvent(args.event.id, "primary",
                 AddEventModel(summary = binding.newEventSummary.text.toString(),
                 start = Time(timeZone="Europe/Dublin",
                     dateTime=binding.newEventStartDate.text.toString()+"T"+binding.newEventStartTime.text.toString()),
@@ -64,7 +64,12 @@ class EventViewFragment : Fragment() {
             )
         }
 
-      //  ticktock = createTickTock(requireActivity())
+//        eventViewViewModel.observableRelatedEvents.observe(viewLifecycleOwner, Observer { relatedEvents ->
+//            relatedEvents?.let { renderRelatedEvents() }
+//        })
+
+
+        //  ticktock = createTickTock(requireActivity())
 
 //        val textView: TextView = binding.textEventview
 //        eventViewViewModel.text.observe(viewLifecycleOwner, Observer {
@@ -82,7 +87,8 @@ class EventViewFragment : Fragment() {
 //        })
 
         //eventViewViewModel.findEvent(args.calendar,args.event)
-        render()
+       render()
+        renderRelatedEvents()   //renders but does not upon addition of new event
         return root
     }
 
@@ -112,5 +118,13 @@ class EventViewFragment : Fragment() {
         binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1])
         binding.newEventEndDate.setText(args.event.end.dateTime.split('T')[0])
         binding.newEventEndTime.setText(args.event.end.dateTime.split('T')[1])
+
+         }
+
+
+    private fun renderRelatedEvents() {
+
+        eventViewViewModel.getRelatedEvents(args.event.id)
+        Timber.i("related events"+eventViewViewModel.observableRelatedEvents.value.toString())
     }
 }

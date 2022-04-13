@@ -3,6 +3,7 @@ package org.wit.juggle.models
 import androidx.lifecycle.MutableLiveData
 import org.wit.juggle.api.EventWrapper
 import org.wit.juggle.api.RetrofitHelper
+import org.wit.juggle.firebaseintegration.FirebaseDB
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,7 +70,7 @@ object CalendarManager : CalendarStore {
 
     }
 
-    override fun addRelatedEvent(token:String, calendarId: String, event: AddEventModel) {
+    override fun addRelatedEvent(token:String, eventId: String, calendarId: String, event: AddEventModel) {
 
         val call = RetrofitHelper.getApi().addRelatedEvent(token, calendarId, event)
         Timber.i(event.toString())
@@ -80,8 +81,17 @@ object CalendarManager : CalendarStore {
                 Timber.i(response.body().toString())
                 val eventWrapper = response.body()
                 if (eventWrapper != null) {
-                    Timber.i("Retrofit ${eventWrapper.message}")
-                    Timber.i("Retrofit ${eventWrapper.data.toString()}")
+                    //Timber.i("Retrofit ${eventWrapper.message}")
+                    Timber.i("Retrofit ${eventWrapper.id.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.organizer?.email.toString()}")    // calendar to which the event has been added
+                    Timber.i("Retrofit ${eventWrapper.start?.dateTime.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.summary}")
+                    Timber.i("Retrofit ${eventWrapper.creator?.email.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.status}")
+                    var relatedEvent = RelatedEventModel(eventWrapper.id.toString(), eventWrapper.organizer?.email.toString(),
+                        eventWrapper.summary, eventWrapper.start?.timeZone.toString(), eventWrapper.start?.dateTime.toString(),
+                    eventWrapper.end?.timeZone.toString(), eventWrapper.end?.dateTime.toString())
+                    FirebaseDB.saveRelatedEvent(eventId, eventWrapper.id.toString(), relatedEvent)
                 }
             }
 
