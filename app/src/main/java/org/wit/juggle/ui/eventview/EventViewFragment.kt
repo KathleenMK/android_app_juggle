@@ -100,8 +100,8 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
     }
 
     private fun render() {
-        Timber.i("in Event View Frag render :" + args.calendar + args.event)
-        binding.calendar = args.calendar
+        Timber.i("in Event View Frag render :" + args.calendarName + args.event)
+        binding.calendarName = args.calendarName
         binding.event = args.event
 
         binding.eventStartDate.setText(args.event.start.dateTime.split('T')[0])

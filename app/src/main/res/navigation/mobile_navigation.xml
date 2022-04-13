@@ -42,8 +42,9 @@
         android:name="org.wit.juggle.ui.eventview.EventViewFragment"
         android:label="EventViewFragment">
     <argument
-        android:name="calendar"
-        app:argType="org.wit.juggle.models.CalendarModel"/>
+        android:name="calendarName"
+        app:argType="string"
+        />
         <argument
             android:name="event"
             app:argType="org.wit.juggle.models.EventModel" />

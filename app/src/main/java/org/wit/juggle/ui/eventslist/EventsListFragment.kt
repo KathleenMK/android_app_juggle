@@ -89,6 +89,7 @@ class EventsListFragment : Fragment(), EventClickListener {
         else{
               Timber.i("args.calendar is null")
               Timber.i(eventsListViewModel.observableUser.value.toString())
+              binding.userJuggled.setText("All the Juggled")
               //eventsListViewModel.findCalendarEvents("primary")
             }
         return root
@@ -142,15 +143,21 @@ class EventsListFragment : Fragment(), EventClickListener {
 
     override fun onEventClick(event: EventModel) {
         Timber.i("in onEvent Click"+event.toString())
-//        val eventCalendarSummary: String
-//        if (args.calendar == null){
-//            eventCalendarSummary = eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString()
-//        }
-//        else {
-//            eventCalendarSummary = args.calendar!!.summary.toString()
-//        }
+        val calendarName: String
+        if (args.calendar == null){
+            calendarName = eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString()
+        }
+        else {
+            calendarName = args.calendar!!.summary.toString()
+        }
 
-        val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(args.calendar!!,event)
-        findNavController().navigate(action)
-    }
+
+            val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(
+                calendarName,
+                event
+            )
+            findNavController().navigate(action)
+        }
+
+
 }

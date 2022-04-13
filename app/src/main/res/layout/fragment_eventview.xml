@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="calendar"
-            type="org.wit.juggle.models.CalendarModel" />
+            name="calendarName"
+            type="String" />
 
         <variable
             name="event"
@@ -70,7 +70,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="8dp"
                         android:hint="@string/calendarSummaryHeading"
-                        android:text="@{calendar.summary}"
+                        android:text="@{calendarName}"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetail"
                         app:layout_constraintTop_toTopOf="parent" />
