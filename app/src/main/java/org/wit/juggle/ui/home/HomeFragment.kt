@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -85,10 +86,12 @@ class HomeFragment : Fragment(), CalendarClickListener {
 //        homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
 //            calendars?.let { render(calendars as ArrayList<CalendarModel>) }
 //        })
-        binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())
+      //  binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())
         showTickTock(ticktock, "Calendar Info on the way...")
         homeViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
-            user?.let { binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString()) }
+            user?.let { binding.userGoogle.setText(homeViewModel.observableUser.value?.userName.toString())
+                        binding.userJugglers.setText(homeViewModel.observableUser.value?.jugglers?.keys.toString())
+                binding.userJuggled.setText(homeViewModel.observableUser.value?.juggled?.keys.toString())}
         })
         homeViewModel.observableCalendars.observe(viewLifecycleOwner, Observer { calendars ->
             calendars?.let {
@@ -118,6 +121,12 @@ class HomeFragment : Fragment(), CalendarClickListener {
 //            // Checking the results
 //                Timber.i("api reponse: "+result.body().toString())
 //        }
+
+        binding.editUserBtn.setOnClickListener() {
+            Timber.i("in editUser button")
+            binding.recyclerViewCalendars.visibility = View.VISIBLE
+            binding.editUserBtn.visibility = View.GONE
+        }
 
 
         binding.saveUserBtn.setOnClickListener() {
@@ -160,11 +169,13 @@ class HomeFragment : Fragment(), CalendarClickListener {
 
             if (checkComplete) {
                 Timber.i("in my new button")
-                homeViewModel.saveUser(
-                    signedInViewModel.liveFirebaseUser,
-                    jugglers,
-                    juggled
-                )
+                if(jugglers.isNotEmpty() || juggled.isNotEmpty()) {
+                    homeViewModel.saveUser(
+                        signedInViewModel.liveFirebaseUser,
+                        jugglers,
+                        juggled
+                    )
+                }
                 //homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
                 val action =
                     HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
@@ -185,6 +196,13 @@ class HomeFragment : Fragment(), CalendarClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun renderUser(){
+        homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
+        binding.userGoogle.setText(homeViewModel.observableUser.value?.userName.toString())
+
+
     }
 
     private fun render(calendars: ArrayList<CalendarModel>) {
@@ -223,6 +241,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
             Toast.makeText(context, "No Calendars have been found...", Toast.LENGTH_LONG).show()
         } else {
             Timber.i("Home fragment render" + calendars.toString())
+            binding.textHome.text = ""
             Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
         }
     }

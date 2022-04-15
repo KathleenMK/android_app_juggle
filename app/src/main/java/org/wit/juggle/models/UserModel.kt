@@ -9,6 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class UserModel(
     var userUid: String = "",
     var googleId: String = "",
+    var userName: String = "",
     var jugglers: HashMap<String,String> = hashMapOf(),
     var juggled: HashMap<String,String> = hashMapOf()
 ) : Parcelable {
@@ -17,6 +18,7 @@ data class UserModel(
         return mapOf(
              "userUid" to userUid,
             "googleId" to googleId,
+            "userName" to userName,
             "jugglers" to jugglers,
             "juggled" to juggled
         )

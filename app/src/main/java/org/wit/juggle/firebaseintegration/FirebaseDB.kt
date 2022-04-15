@@ -22,8 +22,9 @@ object FirebaseDB {
         Timber.i("in FirebaseDB createUser")
         val userUid = firebaseUser.value!!.uid
         val googleId = firebaseUser.value!!.email.toString()
+        val userName = firebaseUser.value!!.displayName.toString()
 
-        val user = UserModel(userUid, googleId, jugglers, juggled)
+        val user = UserModel(userUid, googleId, userName, jugglers, juggled)
 
         val userValues = user.toMap()
 

@@ -16,6 +16,15 @@
     <string name="login_text">Juggle</string>
     <string name="login_image">Login Image</string>
 
+    <string name="saveUserBtn">Continue</string>
+    <string name="userGoogle">Google User Name</string>
+    <string name="userJugglersHeading">Jugglers: </string>
+    <string name="userJugglers">User\'s Jugglers</string>
+    <string name="userJuggledHeading">Juggled: </string>
+    <string name="userJuggled">User\'s Juggled</string>
+    <string name="editUserBtn">Edit</string>
+
+
 <!-- Sign-in status messages -->
     <string name="signed_in_fmt">Signed in as: %s</string>
     <string name="signed_in">Signed in</string>

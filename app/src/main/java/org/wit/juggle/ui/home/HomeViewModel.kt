@@ -18,7 +18,7 @@ import timber.log.Timber
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "Your Calendars..."
     }
 
     //var googleSignInAccount = MutableLiveData<GoogleSignInAccount>()

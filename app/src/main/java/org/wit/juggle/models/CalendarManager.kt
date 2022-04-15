@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import timber.log.Timber
+import java.lang.Exception
 
 object CalendarManager : CalendarStore {
 
@@ -22,17 +23,22 @@ object CalendarManager : CalendarStore {
                 call: Call<CalendarListModel>,
                 response: Response<CalendarListModel>
             ) {
-                val calendarListModelValue = response.body() as CalendarListModel
-                val allCalendars = calendarListModelValue.items as ArrayList<CalendarModel>
-                val ownerCalendars = ArrayList<CalendarModel>()
-                for (cal in allCalendars){
-                    if (cal.accessRole=="owner"){
-                        ownerCalendars.add(cal)
-                    }
+                try {
+                    val calendarListModelValue = response.body() as CalendarListModel
+                    val allCalendars = calendarListModelValue.items as ArrayList<CalendarModel>
+                    val ownerCalendars = ArrayList<CalendarModel>()
+                    for (cal in allCalendars) {
+                        if (cal.accessRole == "owner") {
+                            ownerCalendars.add(cal)
+                        }
 
+                    }
+                    calendars.value = ownerCalendars
+                    Timber.i("Retrofit JSON = ${response.body()}")
                 }
-                calendars.value = ownerCalendars
-               Timber.i("Retrofit JSON = ${response.body()}")
+                catch (e: Exception) {
+                    calendars.value = arrayListOf()
+                }
             }
 
             override fun onFailure(call: Call<CalendarListModel>, t: Throwable) {
