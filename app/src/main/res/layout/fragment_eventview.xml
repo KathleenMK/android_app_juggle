@@ -342,13 +342,23 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/newEventEndDate" />
 
+                    <Spinner
+                        android:id="@+id/jugglerSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTime"/>
+
                     <Button
                         android:id="@+id/addRelatedEventBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/addRelatedEvent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTime" />
+                        app:layout_constraintTop_toBottomOf="@+id/jugglerSpinner" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

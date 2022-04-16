@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/eventStart"
                 android:maxLines="1"
-                android:text="@{relatedEvent.owner.toString()}" />
+                android:text="@{relatedEvent.ownerAlias.toString()}" />
 
         </RelativeLayout>
 

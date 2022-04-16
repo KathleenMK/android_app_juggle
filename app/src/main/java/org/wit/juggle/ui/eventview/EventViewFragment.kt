@@ -6,16 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.juggle.databinding.FragmentEventviewBinding
 import timber.log.Timber
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
+import org.wit.juggle.R
 import org.wit.juggle.adapters.RelatedEventAdapter
 import org.wit.juggle.adapters.RelatedEventClickListener
 import org.wit.juggle.models.*
 import org.wit.juggle.ui.eventslist.EventsListFragmentDirections
+
+
+
+
 
 
 class EventViewFragment : Fragment(), RelatedEventClickListener {
@@ -50,7 +57,8 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
 
         binding.addRelatedEventBtn.setOnClickListener(){
             Timber.i("in my new button")
-            eventViewViewModel.addRelatedEvent(args.event.id, "primary",
+            eventViewViewModel.addRelatedEvent(args.event.id, args.user.jugglers.getValue(binding.jugglerSpinner.selectedItem.toString()),
+                binding.jugglerSpinner.selectedItem.toString(),
                 AddEventModel(summary = binding.newEventSummary.text.toString(),
                 start = Time(timeZone="Europe/Dublin",
                     dateTime=binding.newEventStartDate.text.toString()+"T"+binding.newEventStartTime.text.toString()),
@@ -61,8 +69,18 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
 
         eventViewViewModel.observableRelatedEvents.observe(viewLifecycleOwner, Observer { relatedEvents ->
             relatedEvents?.let { renderRelatedEvents(relatedEvents as ArrayList<RelatedEventModel>) }
-        })          //constantly updating even without changes
+        }) //constantly updating even without changes
 
+
+        val spinner: Spinner =
+            root.findViewById(R.id.jugglerSpinner)
+        val values = arrayListOf<String>()
+        for (j in 0 until args.user.jugglers.keys.size) {
+        values.add(args.user.jugglers.keys.elementAt(j).toString())}
+        val adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, values)
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+        spinner.adapter = adapter
+        //https://stackoverflow.com/questions/48055423/spinner-in-a-fragment 16Apr22
 
         //  ticktock = createTickTock(requireActivity())
 
@@ -85,6 +103,11 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
        render()
         eventViewViewModel.getRelatedEvents(args.event.id)  // doesn't update upon new addtiona
         //renderRelatedEvents()   //renders but does not upon addition of new event
+
+
+
+
+
         return root
     }
 

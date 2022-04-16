@@ -76,7 +76,7 @@ object CalendarManager : CalendarStore {
 
     }
 
-    override fun addRelatedEvent(token:String, eventId: String, calendarId: String, event: AddEventModel) {
+    override fun addRelatedEvent(token:String, eventId: String, calendarId: String, ownerAlias: String, event: AddEventModel) {
 
         val call = RetrofitHelper.getApi().addRelatedEvent(token, calendarId, event)
         Timber.i(event.toString())
@@ -94,7 +94,7 @@ object CalendarManager : CalendarStore {
                     Timber.i("Retrofit ${eventWrapper.summary}")
                     Timber.i("Retrofit ${eventWrapper.creator?.email.toString()}")
                     Timber.i("Retrofit ${eventWrapper.status}")
-                    var relatedEvent = RelatedEventModel(eventWrapper.id.toString(), eventWrapper.organizer?.email.toString(),
+                    var relatedEvent = RelatedEventModel(eventWrapper.id.toString(), eventWrapper.organizer?.email.toString(), ownerAlias,
                         eventWrapper.summary, eventWrapper.start?.timeZone.toString(), eventWrapper.start?.dateTime.toString(),
                     eventWrapper.end?.timeZone.toString(), eventWrapper.end?.dateTime.toString())
                     FirebaseDB.saveRelatedEvent(eventId, eventWrapper.id.toString(), relatedEvent)

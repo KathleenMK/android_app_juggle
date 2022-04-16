@@ -32,6 +32,7 @@ data class AddEventModel(   //id and created not needed for inserting event
 data class RelatedEventModel (
     val id: String = "",
     val owner: String = "",
+    var ownerAlias: String = "",
     val summary: String = "",
     val startTimeZone: String = "",
     val startDateTime: String = "",
@@ -43,6 +44,7 @@ data class RelatedEventModel (
         return mapOf(
             "id" to id,
             "owner" to owner,
+            "ownerAlias" to ownerAlias,
             "summary" to summary,
             "startTimeZone" to startTimeZone,
             "startDateTime" to startDateTime,

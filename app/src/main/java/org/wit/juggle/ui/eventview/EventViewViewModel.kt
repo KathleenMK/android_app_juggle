@@ -35,9 +35,9 @@ class EventViewViewModel (app: Application) : AndroidViewModel(app) {
 
     val token = app.getString(R.string.temp_bearer_access_token)
 
-    fun addRelatedEvent(eventId: String, calendarId: String, event: AddEventModel){
+    fun addRelatedEvent(eventId: String, calendarId: String, ownerAlias: String, event: AddEventModel){
         Timber.i("In my new add function"+event.toString())
-        CalendarManager.addRelatedEvent(token, eventId, calendarId, event)
+        CalendarManager.addRelatedEvent(token, eventId, calendarId, ownerAlias, event)
     }
 
 

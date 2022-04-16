@@ -48,5 +48,9 @@
         <argument
             android:name="event"
             app:argType="org.wit.juggle.models.EventModel" />
+        <argument
+            android:name="user"
+            app:argType="org.wit.juggle.models.UserModel"
+            />
     </fragment>
 </navigation>

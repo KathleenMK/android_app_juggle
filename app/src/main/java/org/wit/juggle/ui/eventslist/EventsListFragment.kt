@@ -154,7 +154,8 @@ class EventsListFragment : Fragment(), EventClickListener {
 
             val action = EventsListFragmentDirections.actionNavigationEventslistToEventViewFragment(
                 calendarName,
-                event
+                event,
+                eventsListViewModel.observableUser.value!!
             )
             findNavController().navigate(action)
         }
