@@ -8,5 +8,6 @@ interface CalendarStore {
     fun findCalendarEvents(token:String, calendarId:String, events: MutableLiveData<List<EventModel>>)
     //fun findEvent(calendar:CalendarModel, event:EventModel, eventReturned: MutableLiveData<EventModel>)
     fun addRelatedEvent(token:String, eventId: String, calendarId:String, ownerAlias:String, event: AddEventModel)
+    fun addNewEvent(token:String, calendarId: String, event: AddEventModel)
 
 }

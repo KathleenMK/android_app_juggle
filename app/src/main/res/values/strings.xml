@@ -59,4 +59,11 @@
     <string name="hint_newEventStartTime">New Event Start Time</string>
     <string name="hint_newEventEndDate">New Event End Date</string>
     <string name="hint_newEventEndTime">New Event End Time</string>
+
+<!--    Add Event Fragment-->
+    <string-array name="addEventType">
+        <item>Dinner</item>
+        <item></item>
+    </string-array>
+
 </resources>

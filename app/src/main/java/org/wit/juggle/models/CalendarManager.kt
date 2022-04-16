@@ -107,4 +107,36 @@ object CalendarManager : CalendarStore {
             }
         })
     }
+
+    override fun addNewEvent(token:String, calendarId: String, event: AddEventModel) {
+
+        val call = RetrofitHelper.getApi().addRelatedEvent(token, calendarId, event)
+        Timber.i(event.toString())
+        call.enqueue(object : Callback<EventWrapper> {
+            override fun onResponse(call: Call<EventWrapper>,
+                                    response: Response<EventWrapper>
+            ) {
+                Timber.i(response.body().toString())
+                val eventWrapper = response.body()
+                if (eventWrapper != null) {
+                    //Timber.i("Retrofit ${eventWrapper.message}")
+                    Timber.i("Retrofit ${eventWrapper.id.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.organizer?.email.toString()}")    // calendar to which the event has been added
+                    Timber.i("Retrofit ${eventWrapper.start?.dateTime.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.summary}")
+                    Timber.i("Retrofit ${eventWrapper.creator?.email.toString()}")
+                    Timber.i("Retrofit ${eventWrapper.status}")
+//                    var relatedEvent = RelatedEventModel(eventWrapper.id.toString(), eventWrapper.organizer?.email.toString(), ownerAlias,
+//                        eventWrapper.summary, eventWrapper.start?.timeZone.toString(), eventWrapper.start?.dateTime.toString(),
+//                        eventWrapper.end?.timeZone.toString(), eventWrapper.end?.dateTime.toString())
+                    //FirebaseDB.saveRelatedEvent(eventId, eventWrapper.id.toString(), relatedEvent)
+                }
+            }
+
+            override fun onFailure(call: Call<EventWrapper>, t: Throwable) {
+                Timber.i("Retrofit Error : $t.message")
+                Timber.i("Retrofit create Error : $t.message")
+            }
+        })
+    }
 }
