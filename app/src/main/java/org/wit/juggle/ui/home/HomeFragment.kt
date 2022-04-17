@@ -45,6 +45,7 @@ import org.wit.juggle.utils.createTickTock
 import org.wit.juggle.utils.hideTickTock
 import org.wit.juggle.utils.showTickTock
 import timber.log.Timber
+import timber.log.Timber.i
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -168,18 +169,83 @@ class HomeFragment : Fragment(), CalendarClickListener {
             }
 
             if (checkComplete) {
-                Timber.i("in my new button")
-                if(jugglers.isNotEmpty() || juggled.isNotEmpty()) {
+                if (jugglers.isNotEmpty() && juggled.isNotEmpty()) {    //complete screen
+                    Timber.i("step1")
                     homeViewModel.saveUser(
                         signedInViewModel.liveFirebaseUser,
                         jugglers,
                         juggled
                     )
+                    val action =
+                        HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+                    findNavController().navigate(action)
                 }
-                //homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
-                val action =
-                    HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
-                findNavController().navigate(action)
+                else if (jugglers.isNotEmpty() || juggled.isNotEmpty()) {   //not complete screen but not empty
+                    Timber.i("step2")
+                    Snackbar.make(
+                        it,
+                        "At least one Juggler and one Juggled must be chosen to update",
+                        Snackbar.LENGTH_LONG).show()
+                }
+                else if (homeViewModel.observableUser.value?.juggled.isNullOrEmpty() || homeViewModel.observableUser.value?.jugglers.isNullOrEmpty()
+                    && (juggled.isNullOrEmpty() && jugglers.isNullOrEmpty())){ //empty screen, incomplete DB
+                    Timber.i("step3")
+                    Snackbar.make(
+                        it,
+                        "At least one Juggler and one Juggled must be chosen",
+                        Snackbar.LENGTH_LONG).show()
+
+                }
+                else {  // empty screen and complete DB
+                    Timber.i("step4")
+                    val action =
+                        HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+                    findNavController().navigate(action)
+                }
+
+
+
+
+
+//
+//                if ((homeViewModel.observableUser.value?.juggled.isNullOrEmpty() || homeViewModel.observableUser.value?.jugglers.isNullOrEmpty())
+//                    && (jugglers.isNullOrEmpty() || juggled.isNullOrEmpty()))
+//                {Snackbar.make(
+//                    it,
+//                    "At least one Juggler and one Juggled must be chosen",
+//                    Snackbar.LENGTH_LONG)
+//                }
+//                else {
+//                    if (jugglers.isNotEmpty() && juggled.isNotEmpty()) {
+//                        homeViewModel.saveUser(
+//                            signedInViewModel.liveFirebaseUser,
+//                            jugglers,
+//                            juggled
+//                        )
+//                    }
+//                        val action =
+//                            HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+//                        findNavController().navigate(action)
+//                }
+
+//                Timber.i("in my new button")
+//                if(jugglers.isNotEmpty() && juggled.isNotEmpty()) {
+//                    homeViewModel.saveUser(
+//                        signedInViewModel.liveFirebaseUser,
+//                        jugglers,
+//                        juggled
+//                    )
+//                    val action =
+//                        HomeFragmentDirections.actionNavigationHomeToNavigationEventslist()
+//                    findNavController().navigate(action)
+//                }
+//                else { Snackbar.make(
+//                    it,
+//                    "At least one Juggler and one Juggled must be chosen",
+//                    Snackbar.LENGTH_LONG
+//                )
+//                    .show()}
+
             } else {
                 Snackbar.make(
                     it,
@@ -209,7 +275,10 @@ class HomeFragment : Fragment(), CalendarClickListener {
         binding.recyclerViewCalendars.adapter = CalendarAdapter(calendars, this)
         Timber.i("in HomeFragment render")
         homeViewModel.getUser(signedInViewModel.liveFirebaseUser)
-        binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())
+        if(homeViewModel.observableUser.value?.equals(null) == false)
+        {binding.userGoogle.setText(homeViewModel.observableUser.value?.googleId.toString())}
+        else
+        {}
 
 
 //        var mCredential: GoogleAccountCredential? = null
@@ -242,7 +311,7 @@ class HomeFragment : Fragment(), CalendarClickListener {
         } else {
             Timber.i("Home fragment render" + calendars.toString())
             binding.textHome.text = ""
-            Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
+            //Toast.makeText(context, "Here are your calendars...", Toast.LENGTH_LONG).show()
         }
     }
 

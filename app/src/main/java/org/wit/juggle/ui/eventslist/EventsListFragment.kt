@@ -67,7 +67,7 @@ class EventsListFragment : Fragment(), EventClickListener {
         //binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.values.toString()) //.juggled!!.values.elementAt(0).toString())
         showTickTock(ticktock,"Event Info on the way...")
         eventsListViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
-            user?.let { binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString())
+            user?.let { //binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString())
                 eventsListViewModel.findCalendarEvents(eventsListViewModel.observableUser.value?.juggled!!.values.elementAt(0))}
         })
 
@@ -84,12 +84,13 @@ class EventsListFragment : Fragment(), EventClickListener {
           if(args.calendar != null)
         {
             eventsListViewModel.findCalendarEvents(args.calendar!!.id)
+            binding.userJuggled.setText(args.calendar!!.summary.toString())
 
         }
         else{
               Timber.i("args.calendar is null")
               Timber.i(eventsListViewModel.observableUser.value.toString())
-              binding.userJuggled.setText("All the Juggled")
+              binding.userJuggled.setText("Juggle away")
               //eventsListViewModel.findCalendarEvents("primary")
             }
         return root

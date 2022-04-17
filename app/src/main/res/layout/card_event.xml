@@ -42,7 +42,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/eventSummary"
                 android:maxLines="1"
-                android:text="@{event.start.dateTime.toString()}" />
+                 />
+
+<!--            android:text="@{event.start.dateTime.toString()}"-->
 
 <!--            <TextView-->
 <!--                android:id="@+id/eventEnd"-->

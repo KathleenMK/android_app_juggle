@@ -84,7 +84,7 @@ class AddEventFragment : Fragment() {
                 //diners.add(addEventViewModel.observableUser.value?.juggled!!.values.elementAt(j).toString())
                     var eventPrefix = ""
                     if(binding.addEventTypeSpinner.selectedItem.toString() != ""){
-                        eventPrefix = binding.addEventTypeSpinner.selectedItem.toString() + " : "
+                        eventPrefix = binding.addEventTypeSpinner.selectedItem.toString() + ": "
                     }
                    addEventViewModel.addNewEvent(diners[j],
                     AddEventModel(summary = eventPrefix+binding.eventSummary.text.toString(),
@@ -102,24 +102,29 @@ class AddEventFragment : Fragment() {
 
         addEventViewModel.getUser(signedInViewModel.liveFirebaseUser)
 
-        val current = LocalDateTime.now()
+        render()
+
+        return root
+    }
+
+    private fun render() {
+
+        val startTime = getString(R.string.defaultStartTime)
+        val endTime = getString(R.string.defaultEndTime)
+            //LocalDateTime.now().plusHours(1)
 
         //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        var now = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-        val formatted = current.format(formatter)
+        val formatted = now.format(formatter)
 
         binding.eventStartDate.setText(formatted)
         binding.eventEndDate.setText(formatted)
 
-        val formatter2 = DateTimeFormatter.ofPattern("HH:mm")
-        val formatted2 = current.format(formatter2)
-
-        binding.eventStartTime.setText(formatted2)
-        binding.eventEndTime.setText(formatted2)
+        binding.eventStartTime.setText(startTime)
+        binding.eventEndTime.setText(endTime)
 
         // https://www.datetimeformatter.com/how-to-format-date-time-in-kotlin/ 16Apr22
-
-        return root
     }
 
     override fun onDestroyView() {

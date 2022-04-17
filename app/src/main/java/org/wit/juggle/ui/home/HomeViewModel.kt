@@ -80,6 +80,7 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
             Timber.i("Firebase DB User Success : "+user.value?.userUid)
         } catch (e: IllegalArgumentException) {
             Timber.i(e.toString())
+
         }
 
     }

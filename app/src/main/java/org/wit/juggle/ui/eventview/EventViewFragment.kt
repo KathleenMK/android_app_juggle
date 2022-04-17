@@ -14,6 +14,7 @@ import org.wit.juggle.databinding.FragmentEventviewBinding
 import timber.log.Timber
 import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import org.wit.juggle.R
 import org.wit.juggle.adapters.RelatedEventAdapter
 import org.wit.juggle.adapters.RelatedEventClickListener
@@ -55,26 +56,49 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
 
         binding.recyclerViewRelatedEvents.layoutManager = LinearLayoutManager(activity)
 
-        binding.addRelatedEventBtn.setOnClickListener(){
-            Timber.i("in my new button")
-            eventViewViewModel.addRelatedEvent(args.event.id, args.user.jugglers.getValue(binding.jugglerSpinner.selectedItem.toString()),
-                binding.jugglerSpinner.selectedItem.toString(),
-                AddEventModel(summary = binding.newEventSummary.text.toString(),
-                start = Time(timeZone="Europe/Dublin",
-                    dateTime=binding.newEventStartDate.text.toString()+"T"+binding.newEventStartTime.text.toString()),
-                end = Time(timeZone="Europe/Dublin",
-                    dateTime=binding.newEventEndDate.text.toString()+"T"+binding.newEventEndTime.text.toString()))
-            )
-        }
+
 
         eventViewViewModel.observableRelatedEvents.observe(viewLifecycleOwner, Observer { relatedEvents ->
             relatedEvents?.let { renderRelatedEvents(relatedEvents as ArrayList<RelatedEventModel>) }
         }) //constantly updating even without changes
 
+        binding.addRelatedEventBtn.setOnClickListener(){
+            Timber.i("in my new button")
+            if(binding.jugglerSpinner.selectedItemPosition != 0) {
+                eventViewViewModel.addRelatedEvent(
+                    args.event.id,
+                    args.user.jugglers.getValue(binding.jugglerSpinner.selectedItem.toString()),
+                    binding.jugglerSpinner.selectedItem.toString(),
+                    AddEventModel(
+                        summary = args.calendarName.toString()+" -> "+binding.newEventSummary.text.toString(),
+                        start = Time(
+                            timeZone = "Europe/Dublin",
+                            dateTime = binding.newEventStartDate.text.toString() + "T" + binding.newEventStartTime.text.toString() + ":00+01:00"
+                        ),
+                        end = Time(
+                            timeZone = "Europe/Dublin",
+                            dateTime = binding.newEventEndDate.text.toString() + "T" + binding.newEventEndTime.text.toString() + ":00+01:00"
+                        )
+                    )
+                )
+
+                render()
+            }
+            else{
+                Snackbar.make(
+                    it,
+                    "Choose a Juggler to continue...",
+                    Snackbar.LENGTH_LONG).show()
+
+
+            }
+        }
+
 
         val spinner: Spinner =
             root.findViewById(R.id.jugglerSpinner)
         val values = arrayListOf<String>()
+        values.add("Choose a Juggler")
         for (j in 0 until args.user.jugglers.keys.size) {
         values.add(args.user.jugglers.keys.elementAt(j).toString())}
         val adapter = ArrayAdapter(this.activity!!, android.R.layout.simple_spinner_item, values)
@@ -128,15 +152,15 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
         binding.event = args.event
 
         binding.eventStartDate.setText(args.event.start.dateTime.split('T')[0])
-        binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1])
+        binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
         binding.eventEndDate.setText(args.event.end.dateTime.split('T')[0])
-        binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1])
+        binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1].split(":")[0] + ":" + args.event.end.dateTime.split('T')[1].split(":")[0])
         //binding.createdTime.setText(args.event.created.split('T')[1])
-        binding.createdDate.setText(args.event.created.split('T')[0])
+        //binding.createdDate.setText(args.event.created.split('T')[0])
         binding.newEventStartDate.setText(args.event.start.dateTime.split('T')[0])
-        binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1])
+        binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
         binding.newEventEndDate.setText(args.event.end.dateTime.split('T')[0])
-        binding.newEventEndTime.setText(args.event.end.dateTime.split('T')[1])
+        binding.newEventEndTime.setText(args.event.end.dateTime.split('T')[1].split(":")[0] + ":" + args.event.end.dateTime.split('T')[1].split(":")[0])
 
 
          }

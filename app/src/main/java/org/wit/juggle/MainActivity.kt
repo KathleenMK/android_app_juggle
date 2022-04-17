@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                     this,
                     //getString(R.string.auth_failed),
                     "Welcome " + signedInViewModel.liveFirebaseUser.value?.displayName,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
 
 

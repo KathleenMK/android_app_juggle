@@ -17,12 +17,12 @@
     <string name="login_image">Login Image</string>
 
     <string name="saveUserBtn">Continue</string>
-    <string name="userGoogle">Google User Name</string>
+    <string name="userGoogle">Welcome</string>
     <string name="userJugglersHeading">Jugglers: </string>
-    <string name="userJugglers">User\'s Jugglers</string>
+    <string name="userJugglers">none assigned</string>
     <string name="userJuggledHeading">Juggled: </string>
-    <string name="userJuggled">User\'s Juggled</string>
-    <string name="editUserBtn">Edit</string>
+    <string name="userJuggled">none assigned</string>
+    <string name="editUserBtn">Update</string>
 
 
 <!-- Sign-in status messages -->
@@ -65,5 +65,7 @@
         <item>Dinner</item>
         <item></item>
     </string-array>
+    <string name="defaultStartTime">17:30</string>
+    <string name="defaultEndTime">18:30</string>
 
 </resources>
