@@ -35,6 +35,10 @@ class RelatedEventAdapter(private var relatedEvents: ArrayList<RelatedEventModel
 
         fun bind(relatedEvent: RelatedEventModel, listener: RelatedEventClickListener) {
             binding.relatedEvent = relatedEvent
+            var eventDate = relatedEvent.startDateTime.split("T")[0]
+            binding.eventStart.setText(eventDate
+                    +" @ "
+                    + relatedEvent.startDateTime.split("T")[1].split(":")[0]+":"+relatedEvent.startDateTime.split("T")[1].split(":")[1])
             binding.root.setOnClickListener { listener.onEventClick(relatedEvent) }
             binding.executePendingBindings()
         }

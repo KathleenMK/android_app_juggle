@@ -5,7 +5,7 @@
     <string name="title_addevent">Add Event</string>
     <string name="title_signout">SignOut</string>
     <string name="title_revoke">Revoke</string>
-    <string name="addRelatedEvent">Add Related Event</string>
+    <string name="addRelatedEvent">Add Related</string>
     <string name="hint_alias">Enter an alias</string>
     <string name="hint_role">pick a role</string>
     <string-array name="role_array">
@@ -46,25 +46,30 @@
 
     <!-- Event View Fragment -->
     <string name="calendarSummaryHeading">Calendar:</string>
-    <string name="eventSummaryHeading">Event Summary:</string>
+    <string name="eventSummaryHeading">Summary:</string>
+    <string name="eventStartHeading">Start:</string>
     <string name="eventStartDateHeading">Start Date:</string>
     <string name="eventStartTimeHeading">Start Time:</string>
+    <string name="eventEndHeading">End:</string>
     <string name="eventEndDateHeading">End Date:</string>
     <string name="eventEndTimeHeading">End Time:</string>
-    <string name="eventCreatedDateHeading">Created Date:</string>
-    <string name="eventCreatedTimeHeading">Created Time:</string>
+    <string name="eventCreatedDateHeading">Created:</string>
+<!--    <string name="eventCreatedTimeHeading">Created Time:</string>-->
     <string name="addNewEventHeading">Add a New Event</string>
-    <string name="hint_newEventSummary">New Event Summary</string>
-    <string name="hint_newEventStartDate">New Event Start Date</string>
-    <string name="hint_newEventStartTime">New Event Start Time</string>
-    <string name="hint_newEventEndDate">New Event End Date</string>
-    <string name="hint_newEventEndTime">New Event End Time</string>
+    <string name="relatedEventsHeading">Related Events:</string>
+<!--    <string name="hint_newEventSummary">Event Summary</string>-->
+<!--    <string name="hint_newEventStartDate">Start Date</string>-->
+<!--    <string name="hint_newEventStartTime">New Event Start Time</string>-->
+<!--    <string name="hint_newEventEndDate">New Event End Date</string>-->
+<!--    <string name="hint_newEventEndTime">New Event End Time</string>-->
+    <string name="eventJuggler">Juggler</string>
 
 <!--    Add Event Fragment-->
     <string-array name="addEventType">
         <item>Dinner</item>
         <item></item>
     </string-array>
+    <string name="summary">Add a summary</string>
     <string name="defaultStartTime">17:30</string>
     <string name="defaultEndTime">18:30</string>
 

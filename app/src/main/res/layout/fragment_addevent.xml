@@ -78,7 +78,7 @@
                 android:id="@+id/eventSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_newEventSummary"
+                android:hint="@string/summary"
                 android:textSize="14sp"
                 android:inputType="text"
                 android:layout_marginStart="4dp"

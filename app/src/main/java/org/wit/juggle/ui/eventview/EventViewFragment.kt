@@ -83,6 +83,7 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
                 )
 
                 render()
+                binding.jugglerSpinner.setSelection(0)
             }
             else{
                 Snackbar.make(
@@ -151,12 +152,12 @@ class EventViewFragment : Fragment(), RelatedEventClickListener {
         binding.calendarName = args.calendarName
         binding.event = args.event
 
-        binding.eventStartDate.setText(args.event.start.dateTime.split('T')[0])
-        binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
-        binding.eventEndDate.setText(args.event.end.dateTime.split('T')[0])
-        binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1].split(":")[0] + ":" + args.event.end.dateTime.split('T')[1].split(":")[0])
+        binding.eventStartDate.setText(args.event.start.dateTime.split('T')[0]+" @ "+args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
+       // binding.eventStartTime.setText(args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
+        binding.eventEndDate.setText(args.event.end.dateTime.split('T')[0]+" @ "+args.event.end.dateTime.split('T')[1].split(":")[0] + ":" + args.event.end.dateTime.split('T')[1].split(":")[0])
+      //  binding.eventEndTime.setText(args.event.end.dateTime.split('T')[1].split(":")[0] + ":" + args.event.end.dateTime.split('T')[1].split(":")[0])
         //binding.createdTime.setText(args.event.created.split('T')[1])
-        //binding.createdDate.setText(args.event.created.split('T')[0])
+        binding.createdDate.setText(args.event.created.split('T')[0])
         binding.newEventStartDate.setText(args.event.start.dateTime.split('T')[0])
         binding.newEventStartTime.setText(args.event.start.dateTime.split('T')[1].split(":")[0] + ":" + args.event.start.dateTime.split('T')[1].split(":")[0])
         binding.newEventEndDate.setText(args.event.end.dateTime.split('T')[0])
