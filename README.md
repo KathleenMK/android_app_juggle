@@ -1,4 +1,3 @@
-## An Android App
+## Juggle, an android app
 
-### Features are:
-
+[Juggle GitHub Page](https://kathleenmk.github.io/android_app_juggle/)
