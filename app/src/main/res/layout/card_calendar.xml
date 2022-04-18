@@ -12,59 +12,60 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:backgroundTint="@color/platinum"
+        android:elevation="24dp">
 
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/calendarSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:text="@{calendar.summary}"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/calendarId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/calendarSummary"
+                android:text="@{calendar.id}"
                 android:visibility="gone"
-                android:text="@{calendar.id}" />
-
-            <TextView
-                android:id="@+id/calendarAccessRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/calendarSummary"
-                android:maxLines="1"
-                android:text="@{calendar.accessRole}" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendarSummary" />
 
             <EditText
                 android:id="@+id/calendarAlias"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_alias"
-                android:minHeight="40dp"
+                android:inputType="text"
                 android:textSize="14sp"
-                android:layout_below="@id/role_spinner"
-                android:layout_alignParentEnd="true"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/calendarSummary" />
 
             <Spinner
                 android:id="@+id/role_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:hint="@string/hint_role"
-                android:textSize="14sp"
                 android:textColor="@color/colorPrimaryDark"
-                android:layout_below="@id/calendarSummary"
-                android:layout_alignParentEnd="true"/>
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/calendarAlias"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.cardview.widget.CardView>

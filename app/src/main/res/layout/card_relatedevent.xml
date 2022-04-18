@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="event"
-            type="org.wit.juggle.models.EventModel" />
+            name="relatedEvent"
+            type="org.wit.juggle.models.RelatedEventModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:text="@{event.summary}"
+                android:text="@{relatedEvent.summary}"
                 android:textStyle="bold" />
 
             <TextView
@@ -34,6 +34,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/eventSummary"
                 android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/eventOwner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/eventStart"
+                android:maxLines="1"
+                android:text="@{relatedEvent.ownerAlias.toString()}" />
 
         </RelativeLayout>
 

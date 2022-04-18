@@ -9,22 +9,24 @@
         android:id="@+id/navigation_home"
         android:name="org.wit.juggle.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navigation_home_to_navigation_eventslist"
             app:destination="@id/navigation_eventslist" />
     </fragment>
+
+<!--    nullable safe args as per: https://www.raywenderlich.com/19327407-using-safe-args-with-the-android-navigation-component visited 31Mar22-->
 
     <fragment
         android:id="@+id/navigation_eventslist"
         android:name="org.wit.juggle.ui.eventslist.EventsListFragment"
         android:label="@string/title_eventslist"
         tools:layout="@layout/fragment_eventslist">
-    <argument
-        android:name="calendar"
-        app:argType="org.wit.juggle.models.CalendarModel"
-        app:nullable="true"
-        android:defaultValue="@null" />
+        <argument
+            android:name="calendar"
+            android:defaultValue="@null"
+            app:argType="org.wit.juggle.models.CalendarModel"
+            app:nullable="true" />
         <action
             android:id="@+id/action_navigation_eventslist_to_eventViewFragment"
             app:destination="@id/eventViewFragment" />
@@ -41,11 +43,14 @@
         android:id="@+id/eventViewFragment"
         android:name="org.wit.juggle.ui.eventview.EventViewFragment"
         android:label="EventViewFragment">
-    <argument
-        android:name="calendar"
-        app:argType="org.wit.juggle.models.CalendarModel"/>
+        <argument
+            android:name="calendarName"
+            app:argType="string" />
         <argument
             android:name="event"
             app:argType="org.wit.juggle.models.EventModel" />
+        <argument
+            android:name="user"
+            app:argType="org.wit.juggle.models.UserModel" />
     </fragment>
 </navigation>

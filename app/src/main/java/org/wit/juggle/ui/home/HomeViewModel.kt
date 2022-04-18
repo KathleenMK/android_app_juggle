@@ -14,15 +14,11 @@ import org.wit.juggle.models.CalendarModel
 import org.wit.juggle.models.UserModel
 import timber.log.Timber
 
-//class HomeViewModel : ViewModel() {
 class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "Your Calendars..."
     }
-
-    //var googleSignInAccount = MutableLiveData<GoogleSignInAccount>()
-    //var googleSignInClient = MutableLiveData<GoogleSignInClient>()
 
     var firebaseAuthorization: FirebaseAuthorization = FirebaseAuthorization(app)
     var liveFirebaseUser: MutableLiveData<FirebaseUser> = firebaseAuthorization.liveFirebaseUser
@@ -61,15 +57,14 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
 
     fun saveUser(
         firebaseUser: MutableLiveData<FirebaseUser>,
-        jugglers: HashMap<String,String>,
-        juggled: HashMap<String,String>
+        jugglers: HashMap<String, String>,
+        juggled: HashMap<String, String>
     ) {
         try {
             FirebaseDB.saveUser(firebaseUser, jugglers, juggled)
         } catch (e: IllegalArgumentException) {
             Timber.i(e.toString())
         }
-
     }
 
     fun getUser(
@@ -77,10 +72,9 @@ class HomeViewModel(app: Application) : AndroidViewModel(app) {
     ) {
         try {
             FirebaseDB.getUser(firebaseUser, user)
-            Timber.i("Firebase DB User Success : "+user.value?.userUid)
+            Timber.i("Firebase DB User Success : " + user.value?.userUid)
         } catch (e: IllegalArgumentException) {
             Timber.i(e.toString())
         }
-
     }
 }

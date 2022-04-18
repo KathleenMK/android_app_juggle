@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -34,9 +33,9 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         val navController = navHostFragment.navController
-        //val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -53,15 +52,11 @@ class MainActivity : AppCompatActivity() {
         signedInViewModel = ViewModelProvider(this).get(SignedInViewModel::class.java)
         signedInViewModel.liveFirebaseUser.observe(this, { firebaseUser ->
             if (firebaseUser != null) {
-                //updateNavHeader(firebaseUser)
                 Toast.makeText(
                     this,
-                    //getString(R.string.auth_failed),
                     "Welcome " + signedInViewModel.liveFirebaseUser.value?.displayName,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 ).show()
-
-
             }
         })
 
@@ -71,7 +66,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 
     // following menu methods adapted from https://developer.android.com/guide/topics/ui/menus 05Mar22
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,6 +87,5 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
 }

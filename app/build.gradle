@@ -80,7 +80,7 @@ dependencies {
 //    implementation 'com.google.apis:google-api-services-calendar:v3-rev20211026-1.32.1'
 
     //implementation 'com.google.apis:google-api-services-calendar:v3-rev260-1.23.0' exclude module: 'httpclient'
-   // implementation 'com.google.api-client:google-api-client-android:1.23.0' exclude module: 'httpclient'
+    // implementation 'com.google.api-client:google-api-client-android:1.23.0' exclude module: 'httpclient'
     //implementation 'com.google.http-client:google-http-client-gson:1.23.0' exclude module: 'httpclient'
 
     //taken from https://github.com/andhikayuana/google-calendar-demo/blob/master/app/build.gradle 12Mar22
