@@ -50,16 +50,16 @@ class EventsListFragment : Fragment(), EventClickListener {
 
         ticktock = createTickTock(requireActivity())
 
-        val textView: TextView = binding.textEventslist
-        eventsListViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+//        val textView: TextView = binding.textEventslist
+//        eventsListViewModel.text.observe(viewLifecycleOwner, Observer {
+//            textView.text = it
+//        })
 
         binding.recyclerViewEvents.layoutManager = LinearLayoutManager(activity)
 
         showTickTock(ticktock, "Event Info on the way...")
         eventsListViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
-            user?.let { //binding.userJuggled.setText(eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString())
+            user?.let { //Future development required so that all juggled calendars included in the findCalendarEvents function, can currently only handle one calendar id
                 eventsListViewModel.findCalendarEvents(
                     eventsListViewModel.observableUser.value?.juggled!!.values.elementAt(
                         0
@@ -144,7 +144,7 @@ class EventsListFragment : Fragment(), EventClickListener {
         Timber.i("in onEvent Click" + event.toString())
         val calendarName: String
         if (args.calendar == null) {
-            calendarName =
+            calendarName = //Future development required so that all juggled calendars included in the findCalendarEvents function, can currently only handle first juggled
                 eventsListViewModel.observableUser.value?.juggled!!.keys.elementAt(0).toString()
         } else {
             calendarName = args.calendar!!.summary.toString()

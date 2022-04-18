@@ -69,6 +69,9 @@ class JuggleSignIn : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // initial Google Sign in prior to implementing Firebase authentication was based on the samples at:
+    // https://developers.google.com/identity/sign-in/android/start visited 19Feb22
+    // java code converts to Kotlin in android studio
     private fun googleSignIn() {
         val signInIntent = signInViewModel.firebaseAuthorization
             .googleSignInClient.value!!.signInIntent

@@ -40,6 +40,7 @@ class FirebaseAuthorization(application: Application) {
         configureGoogleSignIn()
     }
 
+    //included requestScopes below based on: https://stackoverflow.com/questions/55657777/google-calendar-api-on-android-access-token visited 20Feb22
     private fun configureGoogleSignIn() {
         var serverClientId =
             application!!.getString(R.string.default_web_client_id)    // oauth_client client_id

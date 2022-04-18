@@ -16,7 +16,8 @@ data class EventModel(
 @Parcelize
 data class Time(
     val timeZone: String,
-    val dateTime: String
+    val dateTime: String    //https://www.json2kt.com/ details how dateTime is a String data type
+
 ) : Parcelable
 
 @Parcelize

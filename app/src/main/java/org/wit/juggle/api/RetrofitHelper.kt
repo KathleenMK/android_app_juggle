@@ -14,7 +14,7 @@ object RetrofitHelper {
 
     val baseUrl = "https://www.googleapis.com/calendar/v3/"
 
-
+    // initial retrofit attempt based on: https://www.geeksforgeeks.org/retrofit-with-kotlin-coroutine-in-android/ visited 05Mar22
     fun getApi(): GoogleCalendarApi {
 
         val gson = GsonBuilder().create()

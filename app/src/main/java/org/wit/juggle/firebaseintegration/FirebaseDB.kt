@@ -10,7 +10,7 @@ import timber.log.Timber
 object FirebaseDB {
 
     private var database: DatabaseReference =
-        FirebaseDatabase.getInstance("").reference
+        FirebaseDatabase.getInstance("https://juggle-90c87-default-rtdb.europe-west1.firebasedatabase.app").reference
 
     fun saveUser(
         firebaseUser: MutableLiveData<FirebaseUser>,

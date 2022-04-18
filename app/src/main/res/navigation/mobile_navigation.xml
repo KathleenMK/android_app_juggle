@@ -15,6 +15,8 @@
             app:destination="@id/navigation_eventslist" />
     </fragment>
 
+<!--    nullable safe args as per: https://www.raywenderlich.com/19327407-using-safe-args-with-the-android-navigation-component visited 31Mar22-->
+
     <fragment
         android:id="@+id/navigation_eventslist"
         android:name="org.wit.juggle.ui.eventslist.EventsListFragment"
