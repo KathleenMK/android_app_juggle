@@ -3,9 +3,7 @@ package org.wit.juggle.firebaseintegration
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import org.wit.juggle.models.EventModel
 import org.wit.juggle.models.RelatedEventModel
-import org.wit.juggle.models.Time
 import org.wit.juggle.models.UserModel
 import timber.log.Timber
 

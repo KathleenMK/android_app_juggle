@@ -41,7 +41,7 @@ class EventAdapter(private var events: ArrayList<EventModel>,
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val formattedNow = now.format(formatter)
             val formattedTomorrow = tomorrow.format(formatter)
-                 var eventDate = event.start.dateTime.split("T")[0]
+            var eventDate = event.start.dateTime.split("T")[0]
             if (eventDate == formattedNow)
             {
                 eventDate = "Today"
@@ -51,7 +51,7 @@ class EventAdapter(private var events: ArrayList<EventModel>,
                 eventDate = "Tomorrow"
             }
 
-            LocalDateTime.now().plusHours(1)
+            //LocalDateTime.now().plusHours(1)
 
 
             binding.eventStart.setText(eventDate

@@ -8,14 +8,20 @@ import retrofit2.http.*
 interface GoogleCalendarApi {
 
     @GET("users/me/calendarList")
-    fun getCalendars(@Header("Authorization") token : String): Call<CalendarListModel>
+    fun getCalendars(@Header("Authorization") token: String): Call<CalendarListModel>
 
     @GET("calendars/{calendarId}/events")
-    fun getCalendarEvents(@Header("Authorization") token : String, @Path("calendarId") calendarId:String): Call<EventListModel>
+    fun getCalendarEvents(
+        @Header("Authorization") token: String,
+        @Path("calendarId") calendarId: String
+    ): Call<EventListModel>
 
     @POST("calendars/{calendarId}/events")
-    fun addRelatedEvent(@Header("Authorization") token : String, @Path("calendarId") calendarId:String, @Body event: AddEventModel): Call<EventWrapper>
-
+    fun addRelatedEvent(
+        @Header("Authorization") token: String,
+        @Path("calendarId") calendarId: String,
+        @Body event: AddEventModel
+    ): Call<EventWrapper>
 
 
 // attempt to get at the access token, currently hardcoded in secret strings

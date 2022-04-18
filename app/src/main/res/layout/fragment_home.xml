@@ -20,8 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-
     <Button
         android:id="@+id/saveUserBtn"
         android:layout_width="wrap_content"
@@ -29,7 +27,8 @@
         android:text="@string/saveUserBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toLeftOf="@id/userJuggled"
-        app:layout_constraintTop_toBottomOf="@id/userJugglers"/>
+        app:layout_constraintTop_toBottomOf="@id/userJugglers" />
+
     <Button
         android:id="@+id/editUserBtn"
         android:layout_width="wrap_content"
@@ -37,7 +36,7 @@
         android:text="@string/editUserBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toLeftOf="@id/userJuggled"
-        app:layout_constraintTop_toBottomOf="@id/saveUserBtn"/>
+        app:layout_constraintTop_toBottomOf="@id/saveUserBtn" />
 
     <TextView
         android:id="@+id/userGoogle"
@@ -46,11 +45,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/userGoogle"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/userGoogle"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userJugglersHeading"
@@ -59,11 +58,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/userJugglersHeading"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userGoogle"
-        android:text="@string/userJugglersHeading"/>
+        app:layout_constraintTop_toBottomOf="@id/userGoogle" />
 
     <TextView
         android:id="@+id/userJugglers"
@@ -72,10 +71,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/userJugglers"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/userJugglersHeading"
-        app:layout_constraintTop_toBottomOf="@id/userGoogle"
-        android:text="@string/userJugglers"/>
+        app:layout_constraintTop_toBottomOf="@id/userGoogle" />
 
     <TextView
         android:id="@+id/userJuggledHeading"
@@ -84,11 +83,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/userJuggledHeading"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userJugglersHeading"
-        android:text="@string/userJuggledHeading"/>
+        app:layout_constraintTop_toBottomOf="@id/userJugglersHeading" />
 
     <TextView
         android:id="@+id/userJuggled"
@@ -97,10 +96,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/userJuggled"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@id/userJuggledHeading"
-        app:layout_constraintTop_toBottomOf="@id/userJugglers"
-        android:text="@string/userJuggled"/>
+        app:layout_constraintTop_toBottomOf="@id/userJugglers" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCalendars"
@@ -109,6 +108,6 @@
         android:scrollbars="vertical"
         android:visibility="invisible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toBottomOf="@+id/saveUserBtn"/>
+        app:layout_constraintTop_toBottomOf="@+id/saveUserBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

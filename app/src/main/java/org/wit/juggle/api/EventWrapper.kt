@@ -1,7 +1,5 @@
 package org.wit.juggle.api
 
-import org.wit.juggle.models.CalendarModel
-import org.wit.juggle.models.EventModel
 import org.wit.juggle.models.Time
 
 class EventWrapper {

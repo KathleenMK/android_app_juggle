@@ -10,13 +10,13 @@ data class UserModel(
     var userUid: String = "",
     var googleId: String = "",
     var userName: String = "",
-    var jugglers: HashMap<String,String> = hashMapOf(),
-    var juggled: HashMap<String,String> = hashMapOf()
+    var jugglers: HashMap<String, String> = hashMapOf(),
+    var juggled: HashMap<String, String> = hashMapOf()
 ) : Parcelable {
     @Exclude
     fun toMap(): Map<String, Any?> {    // required to handle JSON FB DB
         return mapOf(
-             "userUid" to userUid,
+            "userUid" to userUid,
             "googleId" to googleId,
             "userName" to userName,
             "jugglers" to jugglers,

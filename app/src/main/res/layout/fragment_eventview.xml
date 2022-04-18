@@ -121,28 +121,6 @@
                         app:layout_constraintStart_toStartOf="@id/guidelineDetail"
                         app:layout_constraintTop_toBottomOf="@+id/eventSummary" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/eventStartTimeHeading"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="@string/eventStartTimeHeading"-->
-<!--                        android:textStyle="bold|italic"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/eventStartDateHeading" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/eventStartTime"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:hint="@string/eventStartTimeHeading"-->
-<!--                        android:textStyle="bold"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/eventStartDate" />-->
-
                     <TextView
                         android:id="@+id/eventEndDateHeading"
                         android:layout_width="wrap_content"
@@ -165,28 +143,6 @@
                         app:layout_constraintStart_toStartOf="@id/guidelineDetail"
                         app:layout_constraintTop_toBottomOf="@+id/eventStartDate" />
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/eventEndTimeHeading"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="@string/eventEndTimeHeading"-->
-<!--                        android:textStyle="bold|italic"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/eventEndDateHeading" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/eventEndTime"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:hint="@string/eventEndTimeHeading"-->
-<!--                        android:textStyle="bold"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/eventEndDate" />-->
-
                     <TextView
                         android:id="@+id/createdDateHeading"
                         android:layout_width="wrap_content"
@@ -208,29 +164,6 @@
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetail"
                         app:layout_constraintTop_toBottomOf="@+id/eventEndDate" />
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/createdTimeHeading"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="@string/eventCreatedTimeHeading"-->
-<!--                        android:textStyle="bold|italic"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineHeadings"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/createdDateHeading" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/createdTime"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="4dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:hint="@string/eventCreatedTimeHeading"-->
-<!--                        android:textStyle="bold"-->
-<!--                        app:layout_constraintStart_toStartOf="@id/guidelineDetail"-->
-<!--                        app:layout_constraintTop_toBottomOf="@+id/createdDate" />-->
-
 
                     <androidx.constraintlayout.widget.Guideline
                         android:id="@+id/guidelineHeadings"
@@ -263,28 +196,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-
-
                     <TextView
                         android:id="@+id/newEventSummaryHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventSummaryHeading"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="16dp"
+                        android:text="@string/eventSummaryHeading"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/newEventSummary"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
                         android:hint="@string/eventSummaryHeading"
                         android:text="@{event.summary}"
                         android:textSize="14sp"
-                        android:layout_marginTop="4dp"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetailAlt"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -308,13 +239,13 @@
                         android:id="@+id/newEventStartDateHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventStartDateHeading"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="20dp"
+                        android:text="@string/eventStartDateHeading"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventSummaryHeading"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventSummaryHeading" />
 
                     <EditText
                         android:id="@+id/newEventStartDate"
@@ -330,13 +261,13 @@
                         android:id="@+id/newEventStartTimeHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventStartTimeHeading"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="20dp"
+                        android:text="@string/eventStartTimeHeading"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventStartDateHeading"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventStartDateHeading" />
 
                     <EditText
                         android:id="@+id/newEventStartTime"
@@ -347,59 +278,62 @@
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetailAlt"
                         app:layout_constraintTop_toBottomOf="@+id/newEventStartDate" />
+
                     <TextView
                         android:id="@+id/newEventEndDateHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventEndDateHeading"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="20dp"
+                        android:text="@string/eventEndDateHeading"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventStartTimeHeading"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventStartTimeHeading" />
 
                     <EditText
                         android:id="@+id/newEventEndDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventEndDateHeading"
                         android:minHeight="40dp"
+                        android:text="@string/eventEndDateHeading"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetailAlt"
                         app:layout_constraintTop_toBottomOf="@+id/newEventStartTime" />
+
                     <TextView
                         android:id="@+id/newEventEndTimeHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventEndTimeHeading"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="20dp"
+                        android:text="@string/eventEndTimeHeading"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventEndDateHeading"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndDateHeading" />
 
                     <EditText
                         android:id="@+id/newEventEndTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventEndTimeHeading"
                         android:minHeight="40dp"
+                        android:text="@string/eventEndTimeHeading"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetailAlt"
                         app:layout_constraintTop_toBottomOf="@+id/newEventEndDate" />
+
                     <TextView
                         android:id="@+id/newEventJugglerHeading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eventJuggler"
-                        android:textSize="14sp"
                         android:layout_marginStart="4dp"
                         android:layout_marginTop="20dp"
+                        android:text="@string/eventJuggler"
+                        android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@id/guidelineHeadingsAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTimeHeading"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTimeHeading" />
 
                     <Spinner
                         android:id="@+id/jugglerSpinner"
@@ -409,7 +343,7 @@
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="@id/guidelineDetailAlt"
-                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTime"/>
+                        app:layout_constraintTop_toBottomOf="@+id/newEventEndTime" />
 
                     <Button
                         android:id="@+id/addRelatedEventBtn"
@@ -447,36 +381,37 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:backgroundTint="@color/platinum">
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
 
-                <TextView
-                    android:id="@+id/newEventHeading"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/relatedEventsHeading"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    <TextView
+                        android:id="@+id/newEventHeading"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/relatedEventsHeading"
 
-                    android:layout_marginTop="4dp"
+                        android:textSize="18sp"
 
-                    android:layout_marginBottom="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewRelatedEvents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:scrollbars="vertical"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/newEventHeading" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewRelatedEvents"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:scrollbars="vertical"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/newEventHeading" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

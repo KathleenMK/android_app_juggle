@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseUser
 import org.wit.juggle.R
 import org.wit.juggle.firebaseintegration.FirebaseDB
@@ -13,10 +12,10 @@ import org.wit.juggle.models.CalendarManager
 import org.wit.juggle.models.UserModel
 import timber.log.Timber
 
-class AddEventViewModel (app: Application) : AndroidViewModel(app) {
+class AddEventViewModel(app: Application) : AndroidViewModel(app) {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is the Add Event Fragment"
     }
     val text: LiveData<String> = _text
 

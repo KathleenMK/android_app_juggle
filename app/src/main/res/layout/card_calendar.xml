@@ -14,8 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
-        android:elevation="24dp"
-        android:backgroundTint="@color/platinum">
+        android:backgroundTint="@color/platinum"
+        android:elevation="24dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,8 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{calendar.summary}"
-                android:textStyle="bold"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,14 +42,6 @@
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calendarSummary" />
-
-            <!--            <TextView-->
-            <!--                android:id="@+id/calendarAccessRole"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_below="@id/calendarSummary"-->
-            <!--                android:maxLines="1"-->
-            <!--                android:text="@{calendar.accessRole}" />-->
 
             <EditText
                 android:id="@+id/calendarAlias"

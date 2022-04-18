@@ -13,9 +13,10 @@ interface CalendarClickListener {
     fun onCalendarClick(calendar: CalendarModel)
 }
 
-class CalendarAdapter constructor(private var calendars: ArrayList<CalendarModel>,
-                                  private val listener: CalendarClickListener)
-    : RecyclerView.Adapter<CalendarAdapter.MainHolder>() {
+class CalendarAdapter constructor(
+    private var calendars: ArrayList<CalendarModel>,
+    private val listener: CalendarClickListener
+) : RecyclerView.Adapter<CalendarAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardCalendarBinding
@@ -38,12 +39,12 @@ class CalendarAdapter constructor(private var calendars: ArrayList<CalendarModel
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val calendar = calendars[holder.adapterPosition]
-        holder.bind(calendar,listener)
+        holder.bind(calendar, listener)
     }
 
     override fun getItemCount(): Int = calendars.size
 
-    inner class MainHolder(val binding : CardCalendarBinding) :
+    inner class MainHolder(val binding: CardCalendarBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(calendar: CalendarModel, listener: CalendarClickListener) {

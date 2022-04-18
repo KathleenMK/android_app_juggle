@@ -1,9 +1,7 @@
 package org.wit.juggle.models
 
 import android.os.Parcelable
-import com.google.api.client.util.DateTime
 import com.google.firebase.database.Exclude
-import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -19,17 +17,18 @@ data class EventModel(
 data class Time(
     val timeZone: String,
     val dateTime: String
-): Parcelable
+) : Parcelable
 
 @Parcelize
-data class AddEventModel(   //id and created not needed for inserting event
+data class AddEventModel(
+    //id and created not needed for inserting event
     val summary: String,
     val start: Time,
     val end: Time,
 ) : Parcelable
 
 @Parcelize
-data class RelatedEventModel (
+data class RelatedEventModel(
     val id: String = "",
     val owner: String = "",
     var ownerAlias: String = "",
@@ -38,7 +37,7 @@ data class RelatedEventModel (
     val startDateTime: String = "",
     val endTimeZone: String = "",
     val endDateTime: String = "",
-    ) : Parcelable {
+) : Parcelable {
     @Exclude
     fun toMap(): Map<String, Any?> {    // required to handle JSON FB DB
         return mapOf(

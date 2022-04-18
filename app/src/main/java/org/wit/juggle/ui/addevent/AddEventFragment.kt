@@ -20,7 +20,6 @@ import org.wit.juggle.ui.signin.SignedInViewModel
 import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 class AddEventFragment : Fragment() {
@@ -50,7 +49,7 @@ class AddEventFragment : Fragment() {
         })
 
         addEventViewModel.observableUser.observe(viewLifecycleOwner, Observer { user ->
-            user?.let { Timber.i(addEventViewModel.observableUser.value?.jugglers.toString())}
+            user?.let { Timber.i(addEventViewModel.observableUser.value?.jugglers.toString()) }
         })
 
         val spinner: Spinner =
@@ -69,31 +68,41 @@ class AddEventFragment : Fragment() {
             }
         }
 
-        binding.addNewEventBtn.setOnClickListener(){
+        binding.addNewEventBtn.setOnClickListener() {
             Timber.i("in my new button")
             addEventViewModel.getUser(signedInViewModel.liveFirebaseUser)
             Timber.i(addEventViewModel.observableUser.value?.jugglers.toString())
             val diners = arrayListOf<String>()
             for (j in 0 until addEventViewModel.observableUser.value?.jugglers!!.size) {
-                diners.add(addEventViewModel.observableUser.value?.jugglers!!.values.elementAt(j).toString())
+                diners.add(
+                    addEventViewModel.observableUser.value?.jugglers!!.values.elementAt(j)
+                        .toString()
+                )
             }
             for (j in 0 until addEventViewModel.observableUser.value?.juggled!!.size) {
-                diners.add(addEventViewModel.observableUser.value?.juggled!!.values.elementAt(j).toString())
+                diners.add(
+                    addEventViewModel.observableUser.value?.juggled!!.values.elementAt(j).toString()
+                )
             }
             for (j in 0 until diners.size) {
-                //diners.add(addEventViewModel.observableUser.value?.juggled!!.values.elementAt(j).toString())
-                    var eventPrefix = ""
-                    if(binding.addEventTypeSpinner.selectedItem.toString() != ""){
-                        eventPrefix = binding.addEventTypeSpinner.selectedItem.toString() + ": "
-                    }
-                   addEventViewModel.addNewEvent(diners[j],
-                    AddEventModel(summary = eventPrefix+binding.eventSummary.text.toString(),
-                        start = Time(timeZone="Europe/Dublin",
-                            dateTime=binding.eventStartDate.text.toString()+"T"+binding.eventStartTime.text.toString()+":00+01:00"),
-                        end = Time(timeZone="Europe/Dublin",
-                            dateTime=binding.eventEndDate.text.toString()+"T"+binding.eventEndTime.text.toString()+":00+01:00")
+                var eventPrefix = ""
+                if (binding.addEventTypeSpinner.selectedItem.toString() != "") {
+                    eventPrefix = binding.addEventTypeSpinner.selectedItem.toString() + ": "
+                }
+                addEventViewModel.addNewEvent(
+                    diners[j],
+                    AddEventModel(
+                        summary = eventPrefix + binding.eventSummary.text.toString(),
+                        start = Time(
+                            timeZone = getString(R.string.defaultTimeZone),
+                            dateTime = binding.eventStartDate.text.toString() + "T" + binding.eventStartTime.text.toString() + ":00+01:00"
+                        ),
+                        end = Time(
+                            timeZone = getString(R.string.defaultTimeZone),
+                            dateTime = binding.eventEndDate.text.toString() + "T" + binding.eventEndTime.text.toString() + ":00+01:00"
+                        )
                     )
-                    )
+                )
 
             }
 
@@ -111,9 +120,8 @@ class AddEventFragment : Fragment() {
 
         val startTime = getString(R.string.defaultStartTime)
         val endTime = getString(R.string.defaultEndTime)
-            //LocalDateTime.now().plusHours(1)
 
-        //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")
+        // Formatting approach as follows from: https://www.datetimeformatter.com/how-to-format-date-time-in-kotlin/ 16Apr22
         var now = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val formatted = now.format(formatter)
@@ -123,8 +131,6 @@ class AddEventFragment : Fragment() {
 
         binding.eventStartTime.setText(startTime)
         binding.eventEndTime.setText(endTime)
-
-        // https://www.datetimeformatter.com/how-to-format-date-time-in-kotlin/ 16Apr22
     }
 
     override fun onDestroyView() {

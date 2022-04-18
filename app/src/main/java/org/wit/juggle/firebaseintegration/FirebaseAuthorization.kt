@@ -1,6 +1,5 @@
 package org.wit.juggle.firebaseintegration
 
-import android.R.attr
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,21 +12,10 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import org.wit.juggle.R
 import timber.log.Timber
-import android.R.attr.data
-import com.google.android.gms.auth.GoogleAuthUtil
-
-import com.google.android.gms.auth.api.Auth
-
-import com.google.android.gms.auth.api.signin.GoogleSignInResult
-import com.google.api.client.extensions.android.http.AndroidHttp
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
-import com.google.api.client.json.jackson2.JacksonFactory
-import com.google.api.client.util.ExponentialBackOff
-import com.google.api.services.calendar.CalendarScopes
 import org.wit.juggle.models.UserModel
 
 
-class FirebaseAuthorization (application: Application) {
+class FirebaseAuthorization(application: Application) {
 
     private var application: Application? = null
 
@@ -58,44 +46,43 @@ class FirebaseAuthorization (application: Application) {
         Timber.i("configureGoogleGI serverClientId " + serverClientId)
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestScopes(Scope("https://www.googleapis.com/auth/calendar"))
-            //.requestScopes(Scope("https://www.googleapis.com/auth/calendar.readonly"))
             .requestIdToken(serverClientId)
             .requestServerAuthCode(serverClientId)
             .requestEmail()
             .build()
 
         googleSignInClient.value = GoogleSignIn.getClient(application!!.applicationContext, gso)
-        Timber.i("line 61 FirebaseA: "+googleSignInClient.value.toString())
+        Timber.i("line 61 FirebaseA: " + googleSignInClient.value.toString())
 
 
     }
 
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        
+
         firebaseAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(application!!.mainExecutor) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update with the signed-in user's information
-                    Timber.i( "signInWithCredential:success")
-                    Timber.i( "line 58: "+acct.idToken)
+                    Timber.i("signInWithCredential:success")
+                    Timber.i("line 58: " + acct.idToken)
                     Timber.i("line 59: " + acct.serverAuthCode)
                     Timber.i(acct.grantedScopes.toString())
                     Timber.i(acct.requestedScopes.toString())
-                    Timber.i("line 64"+task.result.toString())
-                    Timber.i("line 64"+acct.idToken)
+                    Timber.i("line 64" + task.result.toString())
+                    Timber.i("line 64" + acct.idToken)
                     Timber.i(acct.account.toString())
                     liveFirebaseUser.postValue(firebaseAuth!!.currentUser)
 
                 } else {
                     // If sign in fails, display a message to the user.
-                   Timber.i( "signInWithCredential:failure $task.exception")
+                    Timber.i("signInWithCredential:failure $task.exception")
                     errorStatus.postValue(true)
 
                 }
             }
-
-     // mCredential is null...
+//ATTEMPT TO GET AT THE ACCESS TOKEN
+        // mCredential is null...
 //        var mCredential = GoogleAccountCredential.usingOAuth2(
 //            application!!.applicationContext,
 //            arrayListOf(CalendarScopes.CALENDAR)
