@@ -7,7 +7,7 @@ Juggle is a native Android application that upon Google Sign-In retrieves and di
 Juggled events can be viewed within the app and related events(getting there, getting home, other) added to one of the Jugglers calendars.
 The app utilizes the Google calendar APIs and so the Android family can continue to use all the Google calendar event functionality.
 
-![highLevelView](https://github.com/KathleenMK/android_app_juggle/blob/main/KMK_handbook_graphic.png)
+![highLevelView](KMK_handbook_graphic.png)
 
  - Built using Kotlin
  - A User signs in using their existing Google account
