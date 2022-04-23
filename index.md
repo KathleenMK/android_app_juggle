@@ -1,6 +1,3 @@
-## Juggle
-
-# An Android App built to manage busy families’ calendars
 
 Inspired by the constant juggle of children’s activities and the assignment of related tasks for their parents.
 Juggle is a native Android application that upon Google Sign-In retrieves and displays the calendars for which the user has owner access, the user can assign a Juggler(responsible adult) or Juggled(child) role to each calendar.
