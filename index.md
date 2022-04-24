@@ -15,4 +15,9 @@ The app utilizes the Google calendar APIs and so the Android family can continue
  - App saves to a Firebase Realtime database, a combination of data as retrieved using those APIs and data entered by the User, as well as retrieve data from that database.
  - App can display data sourced from all of the above (Google Sign In, Firebase Authentication, Google calendar APIs and Firebase Realtime database) and move it through the app and display to the User.
 
-[Trello board available here.](https://trello.com/b/ggPVPCOG/juggle)
+
+### Project Links
+- [FINAL REPORT](KathleenMcCarthyKelleher_20042361_FinalReport.pdf) <br>
+- [Demo video](https://youtu.be/Zm30F79KrHc) <br>
+- [Trello board](https://trello.com/b/ggPVPCOG/juggle) <br>
+
